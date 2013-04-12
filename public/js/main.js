@@ -1,6 +1,7 @@
 require.config({
   paths: {
     'jquery': 'libs/jquery',
+    'backbone': 'libs/backbone',
     'underscore': 'libs/underscore',
     'd3': 'libs/d3.v3',
     'app': 'src/app',
@@ -19,10 +20,15 @@ require.config({
     'd3': {
       deps: [],
       exports: 'd3'
+    },
+    'backbone': {
+      deps: ['underscore', 'jquery'],
+      exports: 'Backbone'
     }
   }
 });
 
 require(['app'], function(PouchVision) {
-  PouchVision.start()
+  window.router = new PouchVision.Routers.MainRouter();
+  Backbone.history.start();
 });
