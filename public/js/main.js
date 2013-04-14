@@ -7,12 +7,17 @@ require.config({
     'app': 'src/app',
     'templates': 'templates/template',
     'pouch': 'libs/pouch',
-    'boostrap': 'libs/bootstrap'
+    'boostrap': 'libs/bootstrap',
+    'pouchvision': 'src/pouchvision'
   },
   shim: {
     'underscore': {
       deps: [],
       exports: '_'
+    },
+    'pouchvision': {
+      deps: [],
+      exports: 'PouchVision'
     },
     'pouch': {
       deps: [],
