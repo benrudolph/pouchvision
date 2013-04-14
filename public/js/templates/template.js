@@ -8,13 +8,13 @@ define(['underscore'], function(_) {
     );
 
   window.JST['environment/show'] = _.template([
-      '<label class="pull-left">db.</label>',
+      '<label class="">db.</label>',
       '<select class="api">',
         '<% for (var idx in apis) { %>',
           '<option <% if (apis[idx].name === model.api) { %> selected=selected <% } %>><%= apis[idx].name %></option>',
         '<% } %>',
       '</select>',
-      '(<div class="options"></div>)',
+      '<span class="paren">(</span><div class="options"></div><span class="paren">)</span>',
       '<button class="execute btn">Execute!</button>',
     ].join(''));
 
@@ -22,7 +22,7 @@ define(['underscore'], function(_) {
     '<% for (var idx in options) { %>',
       '<div class="option">',
       '<div class="option-name"><%= options[idx].name %></div>',
-      '<div class="option-value></div>',
+      '<div class="option-value"></div>',
       '</div>',
     '<% } %>'
     ].join(''));
