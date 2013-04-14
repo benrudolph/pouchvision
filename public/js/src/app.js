@@ -21,17 +21,17 @@ define([
             {
               dbname: 'env-left',
               el: '#environment-left',
-              method: 'get'
+              api: 'get'
             },
             {
               dbname: 'env-right',
               el: '#environment-right',
-              method: 'post'
+              api: 'post'
             }
           ])
 
-          this.methods = new PouchVision.Collections.MethodsCollection();
-          this.methods.reset(PouchVision.Methods)
+          this.apis = new PouchVision.Collections.ApisCollection();
+          this.apis.reset(PouchVision.Apis)
         },
 
         routes: {
@@ -43,7 +43,7 @@ define([
         index: function() {
           this.dbView = new PouchVision.Views.EnvironmentIndexView({
             collection: this.dbs,
-            methods: this.methods
+            apis: this.apis
           })
         },
 
@@ -59,7 +59,7 @@ define([
 
         initialize: function(options) {
           console.log("starting...")
-          this.methods = options.methods;
+          this.apis = options.apis;
           this.render();
           this.addAll();
         },
@@ -77,7 +77,7 @@ define([
           var view = new PouchVision.Views.EnvironmentShowView({
             el: model.get('el'),
             model: model,
-            methods: this.methods
+            apis: this.apis
           });
           this.$el.append(view.render().el);
         }
@@ -89,7 +89,7 @@ define([
         template: JST['environment/show'],
 
         initialize: function(options) {
-          this.methods = options.methods;
+          this.apis = options.apis;
 
           Pouch('idb://' + this.model.dbname, function(err, db) {
             this.db = db;
@@ -98,56 +98,56 @@ define([
         },
 
         events: {
-          'change .method' : 'changeMethod'
+          'change .api' : 'changeApi'
         },
 
-        changeMethod: function(e) {
-          this.model.set('method', $(e.currentTarget).val());
+        changeApi: function(e) {
+          this.model.set('api', $(e.currentTarget).val());
         },
 
         execute: function(e) {
 
-          var method = this.$el.find('.method').val()
+          var api = this.$el.find('.api').val()
           var args = [JSON.parse(this.$el.find('.args').val())]
           args.push(function(err, response) {
             alert(response)
           })
 
-          this.db[method].apply(this, args)
+          this.db[api].apply(this, args)
         },
 
-        addMethod: function() {
-          this.methodView = new PouchVision.Views.MethodView(
+        addApi: function() {
+          this.apiView = new PouchVision.Views.ApiView(
             {
-              model: this.methods.findWhere({
-                'name': this.model.get('method')
+              model: this.apis.findWhere({
+                'name': this.model.get('api')
               }),
               el: this.$el.find('.options')
             }
           );
-          this.methodView.render();
+          this.apiView.render();
         },
 
         render: function() {
-          this.$el.html(this.template({ model: this.model, methods: this.methods.toJSON() }));
-          this.addMethod();
+          this.$el.html(this.template({ model: this.model, apis: this.apis.toJSON() }));
+          this.addApi();
           return this;
         }
 
       })
 
-      PouchVision.Views.MethodView = Backbone.View.extend({
-        template: window.JST['method/method'],
+      PouchVision.Views.ApiView = Backbone.View.extend({
+        template: window.JST['api/api'],
 
         render: function() {
           this.$el.html(this.template(this.model.toJSON()));
         }
       })
 
-      PouchVision.Models.Method = Backbone.Model.extend({});
+      PouchVision.Models.Api = Backbone.Model.extend({});
 
-      PouchVision.Collections.MethodsCollection = Backbone.Collection.extend({
-        model: PouchVision.Models.Method
+      PouchVision.Collections.ApisCollection = Backbone.Collection.extend({
+        model: PouchVision.Models.Api
       });
 
       PouchVision.Models.Environment = Backbone.Model.extend({});
@@ -156,7 +156,7 @@ define([
         model: PouchVision.Models.Environment
       });
 
-      PouchVision.Methods = [
+      PouchVision.Apis = [
         {
           'name' : 'post',
           'options' : [{

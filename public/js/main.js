@@ -6,7 +6,8 @@ require.config({
     'd3': 'libs/d3.v3',
     'app': 'src/app',
     'templates': 'templates/template',
-    'pouch': 'libs/pouch'
+    'pouch': 'libs/pouch',
+    'boostrap': 'libs/bootstrap'
   },
   shim: {
     'underscore': {
@@ -20,6 +21,10 @@ require.config({
     'd3': {
       deps: [],
       exports: 'd3'
+    },
+    'bootstrap': {
+      deps: ['jquery'],
+      exports: 'bootstrap'
     },
     'backbone': {
       deps: ['underscore', 'jquery'],
