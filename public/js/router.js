@@ -11,7 +11,7 @@ define([
         {
           dbname: 'env-left',
           el: '#environment-left',
-          api: 'get'
+          api: 'post'
         },
         {
           dbname: 'env-right',

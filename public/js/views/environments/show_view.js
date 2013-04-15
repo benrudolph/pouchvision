@@ -11,7 +11,7 @@ define([
     initialize: function(options) {
       this.apis = options.apis;
 
-      Pouch('idb://' + this.model.dbname, function(err, db) {
+      Pouch(this.model.get('dbname'), function(err, db) {
         this.db = db;
         this.render();
       }.bind(this))
@@ -67,6 +67,11 @@ define([
     render: function() {
       this.$el.html(this.template({ model: this.model, apis: this.apis.toJSON() }));
       this.addApi();
+      this.db.allDocs({ include_docs: true }, function(err, response) {
+        this.docView = new PouchVision.Views.DocIndexView({ collection: response.rows,
+                                                            el: this.$el.find('.docs') });
+        this.docView.render()
+      }.bind(this));
       return this;
     }
 

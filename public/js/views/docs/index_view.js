@@ -4,20 +4,17 @@ define([
   'backbone',    // lib/backbone/backbone
   'pouchvision'
 ], function($, _, Backbone, PouchVision){
-  PouchVision.Views.EnvironmentIndexView = Backbone.View.extend({
-    el: "#pouch-vision",
+  PouchVision.Views.DocIndexView = Backbone.View.extend({
 
-    template: JST['environment/index'],
+    template: JST['doc/index'],
 
     initialize: function(options) {
-      console.log("starting...")
-      this.apis = options.apis;
-      this.render();
-      this.addAll();
+      console.log("rendering docs...")
     },
 
     render: function() {
       this.$el.html(this.template());
+      this.addAll();
       return this;
     },
 
@@ -26,17 +23,18 @@ define([
     },
 
     addOne: function(model) {
-      var view = new PouchVision.Views.EnvironmentShowView({
-        el: model.get('el'),
+      var view = new PouchVision.Views.DocView({
         model: model,
-        apis: this.apis
+        collection: this.collection
       });
+      this.$el.append(view.render().el);
     }
 
   })
 
   return PouchVision;
 });
+
 
 
 

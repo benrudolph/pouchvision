@@ -8,6 +8,7 @@ define(['underscore'], function(_) {
     );
 
   window.JST['environment/show'] = _.template([
+      '<div class="db row">',
       '<label class=" pull-left">db.</label>',
       '<select class="api pull-left">',
         '<% for (var idx in apis) { %>',
@@ -16,6 +17,9 @@ define(['underscore'], function(_) {
       '</select>',
       '<div class="parameters pull-left"></div>',
       '<button class="execute btn pull-right">Execute!</button>',
+      '</div>',
+      '<div class="docs row">',
+      '</div>'
     ].join(''));
 
   window.JST['api/api'] = _.template([
@@ -51,5 +55,12 @@ define(['underscore'], function(_) {
     '</div>'
   ].join(''));
 
+  window.JST['doc/index'] = _.template('');
+
+  window.JST['doc/doc'] = _.template([
+    '<div class="doc">',
+      'title',
+    '</div>'
+  ].join(''));
 
 });
