@@ -17,14 +17,24 @@ define([
       PouchVision.Apis = [
         {
           'name' : 'post',
-          'options' : [{
-            'name': 'conflicts',
-            'type': 'boolean'
-          }]
+          'parameters' : [
+            {
+              'name': 'doc',
+              'type': 'json'
+            },
+            {
+              'name': 'options',
+              'type': 'json',
+              'metadata' : [{
+                'name': 'conflicts',
+                'type': 'boolean'
+              }]
+            }
+          ]
         },
         {
           'name' : 'get',
-          'options' : []
+          'parameters' : []
         }
       ]
 

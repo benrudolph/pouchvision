@@ -42,7 +42,7 @@ define([
           model: this.apis.findWhere({
             'name': this.model.get('api')
           }),
-          el: this.$el.find('.options')
+          el: this.$el.find('.parameters')
         }
       );
       this.apiView.render();

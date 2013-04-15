@@ -2,3 +2,24 @@
   font-size: 30px;
   font-weight: bold;
 }
+
+.parameter .parameter-data {
+  cursor: pointer;
+  padding: 2px;
+  margin: 0 padding2px;
+}
+
+.parameter .parameter-data:hover {
+  background-color: rgb(240,240,240);
+}
+
+.parameter input.option-input {
+  border-radius: 0px;
+  height: 14px;
+  width: 40px;
+  margin: 0 0 2px 0;
+}
+
+.parameter .json {
+  border: 1px black solid;
+}
