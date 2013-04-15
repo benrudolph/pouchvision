@@ -18,22 +18,38 @@ define([
     },
 
     events: {
-      'change .api' : 'changeApi'
+      'change .api' : 'changeApi',
+      'click .execute': 'execute'
     },
 
     changeApi: function(e) {
       this.model.set('api', $(e.currentTarget).val());
     },
 
-    execute: function(e) {
+    execute: function() {
 
-      var api = this.$el.find('.api').val()
-      var args = [JSON.parse(this.$el.find('.args').val())]
-      args.push(function(err, response) {
-        alert(response)
-      })
+      var apiName = this.model.get('api');
+      var api = this.apis.findWhere({ name: apiName });
 
-      this.db[api].apply(this, args)
+      var parsedParameters = api.get('parameters').map(function(parameter) {
+        var parsedParameter;
+        if (parameter.type === 'json') {
+          parsedParameter = {};
+          parameter.data.forEach(function(datum) {
+            // TODO: Add type validation
+            parsedParameter[datum.name] = datum.value;
+          });
+        }
+
+        return parsedParameter;
+
+      }).filter(function(parameter) {
+        return parameter !== undefined;
+      });
+
+
+      console.log(parsedParameters);
+      this.db[apiName].apply(this, parsedParameters)
     },
 
     addApi: function() {
