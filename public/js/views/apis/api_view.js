@@ -23,8 +23,10 @@ define([
       // Finds matching parameter and adds value to the specified option
       parameters = parameters.map(function(p) {
         if ($param.hasClass(p.name) && $target.hasClass('option-value')) {
+          p.data[idx] = p.data[idx] === undefined ? {} : p.data[idx];
           p.data[idx].value = $target.val();
         } else if ($param.hasClass(p.name) && $target.hasClass('option-name')) {
+          p.data[idx] = p.data[idx] === undefined ? {} : p.data[idx];
           p.data[idx].name = $target.val();
         }
         return p;
@@ -35,7 +37,7 @@ define([
     },
 
     onAddNewField: function(e) {
-      this.$el.find('.json .json-data').append(window.JST['parameter/json-new-field']());
+      $(e.target).closest('.json').find('.json-data').append(window.JST['parameter/json-new-field']());
     },
 
     onParameterClick: function(e) {
