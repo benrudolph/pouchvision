@@ -10,6 +10,28 @@ define([
     events: {
       'click .parameter-data' : 'onParameterClick',
       'click .add-new-field' : 'onAddNewField',
+      'keyup .option-input' : 'onInput'
+    },
+
+    onInput: function(e) {
+      var $target = $(e.target)
+      var $parent = $target.parent();
+      var $param = $parent.closest('.parameter');
+      var idx = $parent.index();
+      var parameters = this.model.get('parameters')
+
+      // Finds matching parameter and adds value to the specified option
+      parameters = parameters.map(function(p) {
+        if ($param.hasClass(p.name) && $target.hasClass('option-value')) {
+          p.data[idx].value = $target.val();
+        } else if ($param.hasClass(p.name) && $target.hasClass('option-name')) {
+          p.data[idx].name = $target.val();
+        }
+        return p;
+      });
+
+      console.log(parameters)
+      this.model.set('parameters', parameters);
     },
 
     onAddNewField: function(e) {
@@ -26,8 +48,6 @@ define([
 
     showParameterDetails: function(parameter) {
       var $param = this.$el.find('.' + parameter.name);
-
-      parameter.metadata = parameter.metadata ? parameter.metadata : false;
 
       $param.html(window.JST['parameter/' + parameter.type](parameter));
     },

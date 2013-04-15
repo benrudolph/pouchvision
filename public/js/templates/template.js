@@ -31,21 +31,19 @@ define(['underscore'], function(_) {
 
   window.JST['parameter/json-new-field'] = _.template([
     '<div class="option new">',
-      '<input class="option-name-input option-input" type="text" />:',
-      '<input class="option-value-input option-input" type="text" />',
+      '<input placeholder="key" class="option-name option-input" type="text" />:',
+      '<input placeholder="value" class="option-value option-input" type="text" />',
     '</div>',
   ].join(''));
 
   window.JST['parameter/json'] = _.template([
     '<div class="json">',
     '<div class="json-data">',
-    '<% if (metadata) { %>',
-      '<% for (var idx in metadata) { %>',
-        '<div class="option">',
-        '<span class="option-name"><%= metadata[idx].name %></span>:',
-        '<input class="option-value-input option-input" type="text" />',
-        '</div>',
-      '<% } %>',
+    '<% for (var idx in data) { %>',
+      '<div class="option">',
+      '<span class="option-name"><%= data[idx].name %></span>:',
+      '<input placeholder="value" class="option-value option-input" type="text" />',
+      '</div>',
     '<% } %>',
     window.JST['parameter/json-new-field'](),
     '</div>',

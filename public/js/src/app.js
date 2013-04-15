@@ -20,14 +20,16 @@ define([
           'parameters' : [
             {
               'name': 'doc',
-              'type': 'json'
+              'type': 'json',
+              'data': []
             },
             {
               'name': 'options',
               'type': 'json',
-              'metadata' : [{
+              'data' : [{
                 'name': 'conflicts',
-                'type': 'boolean'
+                'type': 'boolean',
+                'value': null
               }]
             }
           ]
