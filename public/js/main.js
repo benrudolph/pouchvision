@@ -7,7 +7,7 @@ require.config({
     'app': 'src/app',
     'templates': 'templates/template',
     'pouch': 'libs/pouch',
-    'boostrap': 'libs/bootstrap',
+    'bootstrap': 'libs/bootstrap',
     'pouchvision': 'src/pouchvision'
   },
   shim: {

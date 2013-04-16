@@ -26,8 +26,8 @@ define([
 
     routes: {
       '' : 'index',
-      'post' : 'post',
-      'get' : 'get'
+      '*default' : 'index'
+
     },
 
     index: function() {
@@ -36,10 +36,6 @@ define([
         apis: this.apis
       })
     },
-
-    post: function() { },
-
-    get: function() { },
   })
 
 });

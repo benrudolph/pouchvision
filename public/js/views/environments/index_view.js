@@ -28,8 +28,8 @@ define([
     addOne: function(model) {
       var view = new PouchVision.Views.EnvironmentShowView({
         el: model.get('el'),
-        model: model,
-        apis: this.apis
+        model: _.extend({}, model),
+        apis: _.extend({}, this.apis)
       });
     }
 

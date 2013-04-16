@@ -3,6 +3,10 @@
   font-weight: bold;
 }
 
+.environment {
+  min-height: 100px;
+}
+
 .parameter .parameter-data {
   cursor: pointer;
   padding: 2px;
@@ -22,4 +26,13 @@
 
 .parameter .json {
   border: 1px black solid;
+}
+
+.docs .doc {
+  width: 30px;
+  height: 50px;
+  background-color: #ffeccf;
+  border: 1px solid black;
+  display: inline-block;
+  margin: 2px;
 }

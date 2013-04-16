@@ -10,10 +10,16 @@ define([
 
     initialize: function(options) {
       this.apis = options.apis;
+      this.apiViews = {};
+      this.addApi();
+      this.listenTo(this.model, 'change:api', this.addApi);
 
       Pouch(this.model.get('dbname'), function(err, db) {
         this.db = db;
-        this.render();
+        this.db.allDocs({ include_docs: true }, function(err, response) {
+          this.docView = new PouchVision.Views.DocIndexView({ collection: response.rows });
+          this.render();
+        }.bind(this));
       }.bind(this))
     },
 
@@ -23,7 +29,11 @@ define([
     },
 
     changeApi: function(e) {
-      this.model.set('api', $(e.currentTarget).val());
+      var apiName = $(e.currentTarget).val()
+      this.model.set('api', apiName);
+
+      this.render();
+
     },
 
     execute: function() {
@@ -49,29 +59,32 @@ define([
 
 
       console.log(parsedParameters);
-      this.db[apiName].apply(this, parsedParameters)
+      this.db[apiName].apply(this, parsedParameters);
+      window.router.navigate('/#', { trigger: true });
     },
 
     addApi: function() {
-      this.apiView = new PouchVision.Views.ApiView(
+      if (this.apiViews[this.model.get('api')]) {
+        return;
+      }
+
+      var apiModel = this.apis.findWhere({
+        'name': this.model.get('api')
+      });
+
+      this.apiViews[this.model.get('api')] = new PouchVision.Views.ApiView(
         {
-          model: this.apis.findWhere({
-            'name': this.model.get('api')
-          }),
-          el: this.$el.find('.parameters')
+          model: apiModel,
         }
       );
-      this.apiView.render();
     },
 
     render: function() {
-      this.$el.html(this.template({ model: this.model, apis: this.apis.toJSON() }));
-      this.addApi();
-      this.db.allDocs({ include_docs: true }, function(err, response) {
-        this.docView = new PouchVision.Views.DocIndexView({ collection: response.rows,
-                                                            el: this.$el.find('.docs') });
-        this.docView.render()
-      }.bind(this));
+      console.log(this.apis.toJSON());
+      this.$el.html(this.template({ model: this.model.toJSON(), apis: this.apis.toJSON() }));
+
+      this.$el.find('.parameters').html(this.apiViews[this.model.get('api')].render().el);
+      this.$el.find('.docs').html(this.docView.render().el);
       return this;
     }
 
