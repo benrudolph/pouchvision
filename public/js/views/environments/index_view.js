@@ -12,12 +12,19 @@ define([
     initialize: function(options) {
       console.log("starting...")
       this.apis = options.apis;
+      this.statics = options.statics;
+
+      this.staticView = new PouchVision.Views.ApiView({
+        model: _.extend({}, this.statics.at(0))
+      });
+
       this.render();
       this.addAll();
     },
 
     render: function() {
       this.$el.html(this.template());
+      this.$el.find('.static').html(this.staticView.render().el);
       return this;
     },
 

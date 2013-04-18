@@ -24,6 +24,9 @@ define([
 
       this.apis = new PouchVision.Collections.ApisCollection();
       this.apis.reset(PouchVision.Apis)
+
+      this.statics = new PouchVision.Collections.StaticsCollection();
+      this.statics.reset(PouchVision.Statics)
     },
 
     routes: {
@@ -35,7 +38,8 @@ define([
     index: function() {
       this.dbView = new PouchVision.Views.EnvironmentIndexView({
         collection: this.dbs,
-        apis: this.apis
+        apis: this.apis,
+        statics: this.statics
       })
     },
   })
