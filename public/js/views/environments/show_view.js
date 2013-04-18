@@ -18,7 +18,10 @@ define([
       Pouch(this.model.get('dbname'), function(err, db) {
         this.db = db;
         this.db.allDocs({ include_docs: true }, function(err, response) {
-          this.docView = new PouchVision.Views.DocIndexView({ collection: response.rows });
+          var docCollection = new PouchVision.Collections.DocsCollection();
+          docCollection.reset(response.rows);
+
+          this.docView = new PouchVision.Views.DocIndexView({ collection: docCollection });
           this.render();
         }.bind(this));
       }.bind(this))

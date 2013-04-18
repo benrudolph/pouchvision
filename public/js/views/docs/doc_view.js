@@ -17,7 +17,15 @@ define([
     },
 
     render: function() {
+
+      var color = (Math.abs(this.model.get('id').hashCode() % 0xFFFFFF)).toString(16);
+
+      while (color.length < 6) { color += '0' }
+
+      this.model.set('color', color);
       this.$el.html(this.template());
+      this.$el.css('background-color', '#' + this.model.get('color'));
+
 
       this.$el.popover({
         title: 'Document',
@@ -28,6 +36,18 @@ define([
     },
 
   })
+
+  String.prototype.hashCode = function(){
+      var hash = 0;
+      if (this.length == 0) return hash;
+      for (i = 0; i < this.length; i++) {
+          char = this.charCodeAt(i);
+          hash = ((hash<<5)-hash)+char;
+          hash = hash & hash; // Convert to 32bit integer
+      }
+      return hash;
+  }
+
 
   return PouchVision;
 });

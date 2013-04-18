@@ -9,7 +9,7 @@ define([
     template: JST['doc/index'],
 
     initialize: function(options) {
-      console.log("rendering docs...")
+      console.log("initing docs...")
     },
 
     render: function() {
