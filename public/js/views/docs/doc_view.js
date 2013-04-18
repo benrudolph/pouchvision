@@ -21,7 +21,7 @@ define([
 
       this.$el.popover({
         title: 'Document',
-        content: JSON.stringify(this.model),
+        content: JSON.stringify(this.model, null, ' '),
         placement: 'top'
       })
       return this;

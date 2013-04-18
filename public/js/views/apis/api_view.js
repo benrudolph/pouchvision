@@ -7,7 +7,7 @@ define([
   PouchVision.Views.ApiView = Backbone.View.extend({
     template: window.JST['api/api'],
 
-    on: {
+    events: {
       'click .parameter-data' : 'onParameterClick',
       'click .add-new-field' : 'onAddNewField',
       'keyup .option-input' : 'onInput'

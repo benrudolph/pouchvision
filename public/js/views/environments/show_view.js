@@ -84,7 +84,11 @@ define([
       this.$el.html(this.template({ model: this.model.toJSON(), apis: this.apis.toJSON() }));
 
       this.$el.find('.parameters').html(this.apiViews[this.model.get('api')].render().el);
+
+      // Rebind events for existing view that is shown again
+      this.apiViews[this.model.get('api')].delegateEvents();
       this.$el.find('.docs').html(this.docView.render().el);
+
       return this;
     }
 
