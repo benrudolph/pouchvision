@@ -9,7 +9,7 @@ define([
 
     events: {
       'click .parameter-data' : 'onParameterClick',
-      'click .add-new-field' : 'onAddNewField',
+      'click .add-new-field' : 'onAddNewJSONField',
       'keyup .option-input' : 'onInput'
     },
 
@@ -25,12 +25,17 @@ define([
 
       // Finds matching parameter and adds value to the specified option
       parameters = parameters.map(function(p) {
-        if ($param.hasClass(p.name) && $target.hasClass('option-value')) {
+        if (p.type === PouchVision.Types.JSON) {
           p.data[idx] = p.data[idx] === undefined ? {} : p.data[idx];
-          p.data[idx].value = $target.val();
-        } else if ($param.hasClass(p.name) && $target.hasClass('option-name')) {
-          p.data[idx] = p.data[idx] === undefined ? {} : p.data[idx];
-          p.data[idx].name = $target.val();
+          if ($param.hasClass(p.name) && $target.hasClass('option-value')) {
+            p.data[idx].value = $target.val();
+          } else if ($param.hasClass(p.name) && $target.hasClass('option-name')) {
+            p.data[idx].name = $target.val();
+          }
+        } else if (p.type === PouchVision.Types.STRING) {
+          if ($param.hasClass(p.name)) {
+            p.data = $target.val();
+          }
         }
         return p;
       });
@@ -39,7 +44,7 @@ define([
       this.model.set('parameters', parameters);
     },
 
-    onAddNewField: function(e) {
+    onAddNewJSONField: function(e) {
       $(e.target).closest('.json').find('.json-data').append(window.JST['parameter/json-new-field']());
     },
 

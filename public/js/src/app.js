@@ -17,21 +17,27 @@ define([
     'templates'
     ], function($, _, d3, Pouch, Backbone, PouchVision, templates) {
 
+
+      PouchVision.Types = {
+        JSON: 'json',
+        STRING: 'string',
+        BOOLEAN: 'boolean'
+      }
       PouchVision.Apis = [
         {
           'name' : 'post',
           'parameters' : [
             {
               'name': 'doc',
-              'type': 'json',
+              'type': PouchVision.Types.JSON,
               'data': []
             },
             {
               'name': 'options',
-              'type': 'json',
+              'type': PouchVision.Types.JSON,
               'data' : [{
                 'name': 'conflicts',
-                'type': 'boolean',
+                'type': PouchVision.Types.BOOLEAN,
                 'value': null
               }]
             }
@@ -39,9 +45,15 @@ define([
         },
         {
           'name' : 'get',
-          'parameters' : []
+          'parameters' : [
+            {
+              'name': 'docid',
+              'type': PouchVision.Types.STRING,
+              'data': ''
+            }]
         }
       ]
+
 
       return PouchVision;
   })

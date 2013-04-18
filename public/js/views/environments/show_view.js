@@ -36,6 +36,10 @@ define([
 
     },
 
+    callback: function(err, response) {
+      this.model.set('response', JSON.stringify(response, null, ' '));
+    },
+
     execute: function() {
 
       var apiName = this.model.get('api');
@@ -43,12 +47,14 @@ define([
 
       var parsedParameters = api.get('parameters').map(function(parameter) {
         var parsedParameter;
-        if (parameter.type === 'json') {
+        if (parameter.type === PouchVision.Types.JSON) {
           parsedParameter = {};
           parameter.data.forEach(function(datum) {
             // TODO: Add type validation
             parsedParameter[datum.name] = datum.value;
           });
+        } else if (parameter.type === PouchVision.Types.STRING) {
+          parsedParameter = parameter.data;
         }
 
         return parsedParameter;
@@ -59,6 +65,8 @@ define([
 
 
       console.log(parsedParameters);
+      parsedParameters.push(this.callback.bind(this))
+
       this.db[apiName].apply(this, parsedParameters);
       window.router.navigate('/#', { trigger: true });
     },

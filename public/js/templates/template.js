@@ -19,8 +19,8 @@ define(['underscore'], function(_) {
       '<div class="parameters pull-left"></div>',
       '<button class="execute btn pull-right">Execute!</button>',
       '</div>',
-      '<div class="docs row">',
-      '</div>'
+      '<div class="response row"><%= model.response %></div>',
+      '<div class="docs row"></div>'
     ].join(''));
 
   window.JST['api/api'] = _.template([
@@ -53,6 +53,14 @@ define(['underscore'], function(_) {
     window.JST['parameter/json-new-field'](),
     '</div>',
     '<i class="add-new-field icon-plus-sign"></i>',
+    '</div>'
+  ].join(''));
+
+  window.JST['parameter/string'] = _.template([
+    '<div class="string">',
+    '<div class="string-data">',
+      '<input placeholder="<%= name %>" class="option-input" type="text" />',
+    '</div>',
     '</div>'
   ].join(''));
 
