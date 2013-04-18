@@ -19,7 +19,7 @@ define(['underscore'], function(_) {
       '<div class="parameters pull-left"></div>',
       '<button class="execute btn pull-right">Execute!</button>',
       '</div>',
-      '<div class="response row"><%= model.response %></div>',
+      '<div class="response row"></div>',
       '<div class="docs row"></div>'
     ].join(''));
 

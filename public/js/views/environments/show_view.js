@@ -2,8 +2,9 @@ define([
   'jquery',     // lib/jquery/jquery
   'underscore', // lib/underscore/underscore
   'backbone',    // lib/backbone/backbone
-  'pouchvision'
-], function($, _, Backbone, PouchVision){
+  'inspector_json',
+  'pouchvision',
+], function($, _, Backbone, InspectorJSON, PouchVision) {
   PouchVision.Views.EnvironmentShowView = Backbone.View.extend({
 
     template: JST['environment/show'],
@@ -37,7 +38,7 @@ define([
     },
 
     callback: function(err, response) {
-      this.model.set('response', JSON.stringify(response, null, ' '));
+      this.model.set('response', response);
     },
 
     execute: function() {
@@ -89,13 +90,20 @@ define([
 
     render: function() {
       console.log(this.apis.toJSON());
-      this.$el.html(this.template({ model: this.model.toJSON(), apis: this.apis.toJSON() }));
+      this.$el.html(this.template({
+        model: this.model.toJSON(),
+        apis: this.apis.toJSON(),
+        inspector: this.inspector }));
 
       this.$el.find('.parameters').html(this.apiViews[this.model.get('api')].render().el);
 
       // Rebind events for existing view that is shown again
       this.apiViews[this.model.get('api')].delegateEvents();
       this.$el.find('.docs').html(this.docView.render().el);
+      this.inspector = new InspectorJSON({
+          element: this.$el.find('.response')
+      });
+      this.inspector.view(JSON.stringify(this.model.get('response')));
 
       return this;
     }

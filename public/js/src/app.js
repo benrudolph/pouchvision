@@ -5,6 +5,8 @@ define([
     'pouch',
     'backbone',
     'pouchvision',
+    'templates',
+    'store',
     '/js/models/api.js', /* Models/Collections */
     '/js/models/environment.js',
     '/js/models/doc.js',
@@ -13,10 +15,10 @@ define([
     '/js/views/environments/index_view.js',
     '/js/views/docs/index_view.js',
     '/js/views/docs/doc_view.js',
-    '/js/router.js', /* Router */
-    'templates'
-    ], function($, _, d3, Pouch, Backbone, PouchVision, templates) {
+    '/js/router.js' /* Router */
+    ], function($, _, d3, Pouch, Backbone, PouchVision, templates, store) {
 
+      window.store = store // Hack to get store in global namespace. Need to fix
 
       PouchVision.Types = {
         JSON: 'json',
@@ -50,6 +52,35 @@ define([
               'name': 'docid',
               'type': PouchVision.Types.STRING,
               'data': ''
+            },
+            {
+              'name': 'options',
+              'type': PouchVision.Types.JSON,
+              'data': [ {
+                'name': 'conflicts',
+                'type': PouchVision.Types.BOOLEAN,
+                'value': null
+              }]
+
+            }]
+        },
+        {
+          'name' : 'allDocs',
+          'parameters' : [
+            {
+              'name': 'options',
+              'type': PouchVision.Types.JSON,
+              'data': [ {
+                'name': 'include_docs',
+                'type': PouchVision.Types.BOOLEAN,
+                'value': null
+              },
+              {
+                'name': 'attachments',
+                'type': PouchVision.Types.BOOLEAN,
+                'value': null
+              }]
+
             }]
         }
       ]

@@ -5,9 +5,11 @@ require.config({
     'underscore': 'libs/underscore',
     'd3': 'libs/d3.v3',
     'app': 'src/app',
+    'store': 'libs/store',
     'templates': 'templates/template',
     'pouch': 'libs/pouch',
     'bootstrap': 'libs/bootstrap',
+    'inspector_json': 'libs/inspector_json',
     'pouchvision': 'src/pouchvision'
   },
   shim: {
@@ -15,9 +17,17 @@ require.config({
       deps: [],
       exports: '_'
     },
+    'store': {
+      deps: [],
+      exports: 'store'
+    },
     'pouchvision': {
       deps: [],
       exports: 'PouchVision'
+    },
+    'inspector_json': {
+      deps: ['jquery', 'underscore', 'store'],
+      exports: 'InspectorJSON'
     },
     'pouch': {
       deps: [],

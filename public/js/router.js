@@ -12,13 +12,13 @@ define([
           dbname: 'env-left',
           el: '#environment-left',
           api: 'post',
-          response: ''
+          response: {}
         },
         {
           dbname: 'env-right',
           el: '#environment-right',
           api: 'post',
-          response: ''
+          response: {}
         }
       ])
 
