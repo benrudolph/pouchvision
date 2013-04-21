@@ -52,11 +52,7 @@ define([
       var parsedParameters = api.get('parameters').map(function(parameter) {
         var parsedParameter;
         if (parameter.type === PouchVision.Types.JSON) {
-          parsedParameter = {};
-          parameter.data.forEach(function(datum) {
-            // TODO: Add type validation
-            parsedParameter[datum.name] = datum.value;
-          });
+          parsedParameter = parameter.data ? parameter.data.getJSON() : {};
         } else if (parameter.type === PouchVision.Types.STRING) {
           parsedParameter = parameter.data;
         }

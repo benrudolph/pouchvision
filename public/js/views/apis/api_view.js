@@ -9,7 +9,6 @@ define([
 
     events: {
       'click .parameter-data' : 'onParameterClick',
-      'click .add-new-field' : 'onAddNewJSONField',
       'keyup .option-input' : 'onInput'
     },
 
@@ -44,10 +43,6 @@ define([
       this.model.set('parameters', parameters);
     },
 
-    onAddNewJSONField: function(e) {
-      $(e.target).closest('.json').find('.json-data').append(window.JST['parameter/json-new-field']());
-    },
-
     onParameterClick: function(e) {
       var parameter = this.model.get('parameters').filter(function(parameter) {
         return parameter.name === $(e.target).text();
@@ -58,8 +53,26 @@ define([
 
     showParameterDetails: function(parameter) {
       var $param = this.$el.find('.' + parameter.name);
+      var parameters;
 
-      $param.html(window.JST['parameter/' + parameter.type](parameter));
+      if  (parameter.type === PouchVision.Types.JSON) {
+        parameter.data = new InspectorJSON({
+          element: $param,
+          contenteditable: true,
+        })
+
+        parameters = this.model.get('parameters').map(function(p) {
+          if (p.name === parameter.name) {
+            return parameter;
+          }
+          return p;
+        });
+        this.model.set('parameters', parameters);
+
+        parameter.data.view({ });
+      } else {
+        $param.html(window.JST['parameter/' + parameter.type](parameter));
+      }
     },
 
     render: function() {
