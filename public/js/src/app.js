@@ -17,7 +17,8 @@ define([
     '/js/views/docs/index_view.js',
     '/js/views/docs/doc_view.js',
     '/js/views/statics/static_view.js',
-    '/js/router.js' /* Router */
+    '/js/router.js', /* Router */
+    '/js/src/util.js'
     ], function($, _, d3, Pouch, Backbone, PouchVision, templates, store) {
 
       window.store = store // Hack to get store in global namespace. Need to fix
@@ -52,12 +53,13 @@ define([
             {
               'name': 'doc',
               'type': PouchVision.Types.JSON,
-              'data': []
+              'data': {}
             },
             {
               'name': 'options',
               'type': PouchVision.Types.JSON,
-              'data' : [{
+              'data': {},
+              'defaults' : [{
                 'name': 'conflicts',
                 'type': PouchVision.Types.BOOLEAN,
                 'value': null
@@ -90,7 +92,8 @@ define([
             {
               'name': 'options',
               'type': PouchVision.Types.JSON,
-              'data': [ {
+              'data': {},
+              'defaults': [ {
                 'name': 'include_docs',
                 'type': PouchVision.Types.BOOLEAN,
                 'value': null

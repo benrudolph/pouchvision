@@ -18,6 +18,7 @@ define(['underscore'], function(_) {
     '<div class="static-container row">',
     '<span class="pull-left">Pouch.replicate</span>',
     '<div class="static"></div>',
+    '<div class="static-response row"></div>',
     '<button class="static-execute btn pull-right">Execute!</button>',
     '</div>',
     '<div class="environment row" id="environment-left"></div>',

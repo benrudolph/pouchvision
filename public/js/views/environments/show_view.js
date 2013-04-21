@@ -42,6 +42,7 @@ define([
 
     callback: function(err, response) {
       this.model.set('response', response);
+      this.render()
     },
 
     execute: function() {
@@ -49,26 +50,12 @@ define([
       var apiName = this.model.get('api');
       var api = this.apis.findWhere({ name: apiName });
 
-      var parsedParameters = api.get('parameters').map(function(parameter) {
-        var parsedParameter;
-        if (parameter.type === PouchVision.Types.JSON) {
-          parsedParameter = parameter.data ? parameter.data.getJSON() : {};
-        } else if (parameter.type === PouchVision.Types.STRING) {
-          parsedParameter = parameter.data;
-        }
-
-        return parsedParameter;
-
-      }).filter(function(parameter) {
-        return parameter !== undefined;
-      });
-
+      var parsedParameters = PouchVision.util.parseParameters(api.get('parameters'))
 
       console.log(parsedParameters);
       parsedParameters.push(this.callback.bind(this))
 
       this.db[apiName].apply(this, parsedParameters);
-      window.router.navigate('/#', { trigger: true });
     },
 
     addApi: function() {
@@ -92,7 +79,7 @@ define([
       this.$el.html(this.template({
         model: this.model.toJSON(),
         apis: this.apis.toJSON(),
-        inspector: this.inspector }));
+      }));
 
       this.$el.find('.parameters').html(this.apiViews[this.model.get('api')].render().el);
 
