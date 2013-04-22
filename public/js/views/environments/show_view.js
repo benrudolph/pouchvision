@@ -18,10 +18,10 @@ define([
       Pouch(this.model.get('dbname'), function(err, db) {
         this.db = db;
         this.db.allDocs({ include_docs: true }, function(err, response) {
-          var docCollection = new PouchVision.Collections.DocsCollection();
-          docCollection.reset(response.rows);
+          this.docCollection = new PouchVision.Collections.DocsCollection();
+          this.docCollection.reset(response.rows);
 
-          this.docView = new PouchVision.Views.DocIndexView({ collection: docCollection });
+          this.docView = new PouchVision.Views.DocIndexView({ collection: this.docCollection });
           this.render();
         }.bind(this));
       }.bind(this))
@@ -42,7 +42,7 @@ define([
 
     callback: function(err, response) {
       this.model.set('response', response);
-      this.render()
+      this.renderResponse()
     },
 
     execute: function() {
@@ -74,6 +74,13 @@ define([
       );
     },
 
+    renderResponse: function() {
+      this.inspector = new InspectorJSON({
+          element: this.$el.find('.response')
+      });
+      this.inspector.view(JSON.stringify(this.model.get('response')));
+    },
+
     render: function() {
       console.log(this.apis.toJSON());
       this.$el.html(this.template({
@@ -86,10 +93,8 @@ define([
       // Rebind events for existing view that is shown again
       this.apiViews[this.model.get('api')].delegateEvents();
       this.$el.find('.docs').html(this.docView.render().el);
-      this.inspector = new InspectorJSON({
-          element: this.$el.find('.response')
-      });
-      this.inspector.view(JSON.stringify(this.model.get('response')));
+
+      this.renderResponse();
 
       return this;
     }

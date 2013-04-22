@@ -21,8 +21,8 @@ define(['underscore'], function(_) {
     '<div class="static-response row"></div>',
     '<button class="static-execute btn pull-right">Execute!</button>',
     '</div>',
-    '<div class="environment row" id="environment-left"></div>',
-    '<div class="environment row" id="environment-right"></div>'
+    '<div class="environment" id="environment-left"></div>',
+    '<div class="environment" id="environment-right"></div>'
     ].join(''));
 
   window.JST['environment/show'] = _.template([

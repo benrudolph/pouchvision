@@ -9,6 +9,9 @@ body {
 
 .environment {
   min-height: 100px;
+  width: 600px;
+  border: 1px rgb(240, 240, 240) solid;
+  padding: 10px;
 }
 
 .parameter .parameter-data {
@@ -36,7 +39,7 @@ body {
   margin: 2px;
 }
 
-.json, .string {
+.parameter .json, .parameter .string {
   width: 380px;
   border: 1px rgb(240, 240, 240) solid;
   margin: 20px 0;

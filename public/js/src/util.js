@@ -29,7 +29,6 @@ define([
   }
 
   PouchVision.util.parseJSON = function(json) {
-      function parseJSON(json) {
         var tr = false;
         try {
             tr = JSON.parse(json);
@@ -41,7 +40,6 @@ define([
             }
         }
         return tr;
-      }
   }
 });
 

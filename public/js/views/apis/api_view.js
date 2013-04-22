@@ -78,8 +78,7 @@ define([
       var value = this.cm[parameter.name].getValue().trim();
       if (parameter.type === PouchVision.Types.JSON) {
         try {
-          if (!value || value[0] !== '{' ||
-            value[value.length-1] !== '}' ||
+          if (!value || value[0] !== '{' || value[value.length-1] !== '}' ||
             (value = PouchVision.util.parseJSON(value)) === false) {
               throw("Not a valid object");
             }
