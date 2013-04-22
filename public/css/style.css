@@ -36,7 +36,7 @@ body {
   margin: 2px;
 }
 
-.json {
+.json, .string {
   width: 380px;
   border: 1px rgb(240, 240, 240) solid;
   margin: 20px 0;

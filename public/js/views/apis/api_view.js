@@ -12,39 +12,17 @@ define([
       'click .parameter-data' : 'onParameterClick',
       'click .code-edit-save' : 'onSave',
       'click .code-edit-cancel' : 'onCancel',
-      'keyup .option-input' : 'onInput'
     },
 
     initialize: function(options) {
       this.cm = {};
-    },
-
-    onInput: function(e) {
-      var $target = $(e.target)
-      var $parent = $target.parent();
-      var $param = $parent.closest('.parameter');
-      var idx = $parent.index();
-      var parameters = this.model.get('parameters')
-
-      // Finds matching parameter and adds value to the specified option
-      parameters = parameters.map(function(p) {
-        if (p.type === PouchVision.Types.JSON) {
-          p.data[idx] = p.data[idx] === undefined ? {} : p.data[idx];
-          if ($param.hasClass(p.name) && $target.hasClass('option-value')) {
-            p.data[idx].value = $target.val();
-          } else if ($param.hasClass(p.name) && $target.hasClass('option-name')) {
-            p.data[idx].name = $target.val();
-          }
-        } else if (p.type === PouchVision.Types.STRING) {
-          if ($param.hasClass(p.name)) {
-            p.data = $target.val();
-          }
-        }
-        return p;
-      });
-
-      console.log(parameters)
-      this.model.set('parameters', parameters);
+      this.cmOptions = {
+        lineNumbers: true,
+        tabSize: 2,
+        autofocus: true,
+        styleActiveLine: true,
+        lineWrapping: true,
+      }
     },
 
     onParameterClick: function(e) {
@@ -68,15 +46,13 @@ define([
       // If codemirror is already showing then just return
       $param.find('.' + parameter.type).removeClass('gone');
 
+
       if (parameter.type === PouchVision.Types.JSON && !this.cm[parameter.name]) {
-        this.cm[parameter.name] = CodeMirror.fromTextArea($param.find("textarea")[0], {
-            lineNumbers: true,
-            tabSize: 4,
-            autofocus: true,
-            styleActiveLine: true,
-            lineWrapping: true,
-            mode: "text/json"
-        });
+        this.cm[parameter.name] = CodeMirror.fromTextArea($param.find("textarea")[0],
+            $.extend(this.cmOptions, { mode: 'application/json' }));
+      } else if (parameter.type === PouchVision.Types.STRING && !this.cm[parameter.name]) {
+        this.cm[parameter.name] = CodeMirror.fromTextArea($param.find("textarea")[0],
+            $.extend(this.cmOptions, { mode: 'text/plain' }));
       }
     },
 
@@ -99,18 +75,30 @@ define([
       console.log(this.cm[parameter.name].getValue());
 
 
-      var json = this.cm[parameter.name].getValue().trim();
-      try {
-        if (!json || json[0] !== '{' ||
-          json[json.length-1] !== '}' ||
-          (json = PouchVision.util.parseJSON(json)) === false) {
-            throw("Not a valid object");
+      var value = this.cm[parameter.name].getValue().trim();
+      if (parameter.type === PouchVision.Types.JSON) {
+        try {
+          if (!value || value[0] !== '{' ||
+            value[value.length-1] !== '}' ||
+            (value = PouchVision.util.parseJSON(value)) === false) {
+              throw("Not a valid object");
+            }
+        } catch (err) {
+            console.error(err);
+        }
+      } else if (parameter.type === PouchVision.Types.STRING) {
+        try {
+          if (!value) throw("Not a valid string");
+          if (value[0] === '"' && value[value.length - 1] === '"') {
+            value = value.substring(1, value.length - 1);
           }
-      } catch (err) {
-          console.error(err);
+        } catch(err) {
+          console.log(err);
+        }
+        console.log(value)
       }
 
-      parameter.data = json;
+      parameter.data = value;
 
       var parameters = this.model.get('parameters').map(function(p) {
         if (p.name === parameter.name) {

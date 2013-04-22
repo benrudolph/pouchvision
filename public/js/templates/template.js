@@ -55,8 +55,9 @@ define(['underscore'], function(_) {
 
   window.JST['parameter/string'] = _.template([
     '<div class="string gone" data-name="<%= name %>">',
-    '<div class="string-data">',
-      '<input placeholder="<%= name %>" class="option-input" type="text" />',
+      '<textarea class="code-editor">""</textarea>',
+      '<button class="code-edit-save">Save</button>',
+      '<button class="code-edit-cancel">Cancel</button>',
     '</div>',
     '</div>'
   ].join(''));

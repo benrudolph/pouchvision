@@ -15,7 +15,7 @@ define([
         if (parameter.type === PouchVision.Types.JSON) {
           parsedParameter = (parameter.data || {})
         } else if (parameter.type === PouchVision.Types.STRING) {
-          parsedParameter = parameter.data;
+          parsedParameter = (parameter.data || '');
         }
 
         return parsedParameter;
