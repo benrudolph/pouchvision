@@ -42,19 +42,19 @@ define(['underscore'], function(_) {
     ].join(''));
 
   window.JST['parameter/json'] = _.template([
-    '<div class="json gone">',
+    '<div class="json gone" data-name="<%= name %>">',
       '<textarea class="code-editor">{',
         '\n',
         '\n',
         '\n',
-        '}</textarea>',
+      '}</textarea>',
       '<button class="code-edit-save">Save</button>',
       '<button class="code-edit-cancel">Cancel</button>',
     '</div>'
   ].join(''));
 
   window.JST['parameter/string'] = _.template([
-    '<div class="string gone">',
+    '<div class="string gone" data-name="<%= name %>">',
     '<div class="string-data">',
       '<input placeholder="<%= name %>" class="option-input" type="text" />',
     '</div>',
@@ -66,7 +66,7 @@ define(['underscore'], function(_) {
     '<% for (var idx in parameters) { %>',
       '<div class="parameter pull-left <%= parameters[idx].name %>">',
         '<div class="parameter-data pull-left"><%= parameters[idx].name %></div>',
-        '<%= window.JST["parameter/" + parameters[idx].type]() %>',
+        '<%= window.JST["parameter/" + parameters[idx].type](parameters[idx]) %>',
       '</div>',
       '<span class="pull-left">,&nbsp;</span>',
     '<% } %>',

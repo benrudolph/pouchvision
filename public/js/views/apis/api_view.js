@@ -10,6 +10,8 @@ define([
 
     events: {
       'click .parameter-data' : 'onParameterClick',
+      'click .code-edit-save' : 'onSave',
+      'click .code-edit-cancel' : 'onCancel',
       'keyup .option-input' : 'onInput'
     },
 
@@ -55,7 +57,7 @@ define([
       if ($param.find('.' + parameter.type).hasClass('gone')) {
         this.showParameterDetails(parameter);
       } else {
-        this.hideParameterDetails(parameter);
+        this.hideParameterDetails(parameter, true);
       }
     },
 
@@ -75,9 +77,21 @@ define([
             lineWrapping: true,
             mode: "text/json"
         });
-        this.cm[parameter.name].on('save', this.save);
-
       }
+    },
+
+    onSave: function(e) {
+      var parameter = this.model.get('parameters').filter(function(parameter) {
+        return parameter.name === $(e.target).parent().data('name');
+      })[0];
+      this.hideParameterDetails(parameter, true);
+    },
+
+    onCancel: function(e) {
+      var parameter = this.model.get('parameters').filter(function(parameter) {
+        return parameter.name === $(e.target).parent().data('name');
+      })[0];
+      this.hideParameterDetails(parameter, false);
     },
 
     save: function(parameter) {
@@ -108,10 +122,11 @@ define([
 
     },
 
-    hideParameterDetails: function(parameter) {
+    hideParameterDetails: function(parameter, save) {
       var $param = this.$el.find('.' + parameter.name);
       $param.find('.' + parameter.type).addClass('gone');
-      this.save(parameter);
+      if (save)
+        this.save(parameter);
     },
 
     render: function() {
