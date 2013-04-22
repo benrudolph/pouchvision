@@ -2,8 +2,9 @@ define([
   'jquery',     // lib/jquery/jquery
   'underscore', // lib/underscore/underscore
   'backbone',    // lib/backbone/backbone
-  'pouchvision'
-], function($, _, Backbone, PouchVision){
+  'pouchvision',
+  'javascript'
+], function($, _, Backbone, PouchVision, CodeMirror){
   PouchVision.Views.ApiView = Backbone.View.extend({
     template: window.JST['api/api'],
 
@@ -13,6 +14,7 @@ define([
     },
 
     initialize: function(options) {
+      this.cm = {};
     },
 
     onInput: function(e) {
@@ -48,31 +50,68 @@ define([
         return parameter.name === $(e.target).text();
       })[0];
 
-      this.showParameterDetails(parameter);
+      var $param = this.$el.find('.' + parameter.name);
+
+      if ($param.find('.' + parameter.type).hasClass('gone')) {
+        this.showParameterDetails(parameter);
+      } else {
+        this.hideParameterDetails(parameter);
+      }
     },
 
     showParameterDetails: function(parameter) {
       var $param = this.$el.find('.' + parameter.name);
       var parameters;
 
-      if  (parameter.type === PouchVision.Types.JSON) {
-        parameter.data = new InspectorJSON({
-          element: $param,
-          contenteditable: true,
-        })
+      // If codemirror is already showing then just return
+      $param.find('.' + parameter.type).removeClass('gone');
 
-        parameters = this.model.get('parameters').map(function(p) {
-          if (p.name === parameter.name) {
-            return parameter;
-          }
-          return p;
+      if (parameter.type === PouchVision.Types.JSON && !this.cm[parameter.name]) {
+        this.cm[parameter.name] = CodeMirror.fromTextArea($param.find("textarea")[0], {
+            lineNumbers: true,
+            tabSize: 4,
+            autofocus: true,
+            styleActiveLine: true,
+            lineWrapping: true,
+            mode: "text/json"
         });
-        this.model.set('parameters', parameters);
+        this.cm[parameter.name].on('save', this.save);
 
-        parameter.data.view({ });
-      } else {
-        $param.html(window.JST['parameter/' + parameter.type](parameter));
       }
+    },
+
+    save: function(parameter) {
+      console.log('save');
+      console.log(this.cm[parameter.name].getValue());
+
+
+      var json = this.cm[parameter.name].getValue().trim();
+      try {
+        if (!json || json[0] !== '{' ||
+          json[json.length-1] !== '}' ||
+          (json = PouchVision.util.parseJSON(json)) === false) {
+            throw("Not a valid object");
+          }
+      } catch (err) {
+          console.error(err);
+      }
+
+      parameter.data = json;
+
+      var parameters = this.model.get('parameters').map(function(p) {
+        if (p.name === parameter.name) {
+          p = parameter;
+        }
+        return p;
+      })
+      this.model.set('parameters', parameters);
+
+    },
+
+    hideParameterDetails: function(parameter) {
+      var $param = this.$el.find('.' + parameter.name);
+      $param.find('.' + parameter.type).addClass('gone');
+      this.save(parameter);
     },
 
     render: function() {

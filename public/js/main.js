@@ -10,12 +10,18 @@ require.config({
     'pouch': 'libs/pouch',
     'bootstrap': 'libs/bootstrap',
     'inspector_json': 'libs/inspector_json',
+    'codemirror': 'libs/codemirror',
+    'javascript': 'libs/javascript',
     'pouchvision': 'src/pouchvision'
   },
   shim: {
     'underscore': {
       deps: [],
       exports: '_'
+    },
+    'javascript': {
+      deps: ['codemirror'],
+      exports: 'CodeMirror'
     },
     'store': {
       deps: [],

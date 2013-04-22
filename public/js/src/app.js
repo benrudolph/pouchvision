@@ -7,6 +7,7 @@ define([
     'pouchvision',
     'templates',
     'store',
+    'javascript',
     '/js/models/api.js', /* Models/Collections */
     '/js/models/environment.js',
     '/js/models/doc.js',
@@ -19,7 +20,7 @@ define([
     '/js/views/statics/static_view.js',
     '/js/router.js', /* Router */
     '/js/src/util.js'
-    ], function($, _, d3, Pouch, Backbone, PouchVision, templates, store) {
+    ], function($, _, d3, Pouch, Backbone, PouchVision, templates, store, CodeMirror) {
 
       window.store = store // Hack to get store in global namespace. Need to fix
 

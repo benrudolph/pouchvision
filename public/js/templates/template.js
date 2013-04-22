@@ -41,46 +41,37 @@ define(['underscore'], function(_) {
       '<div class="docs row"></div>'
     ].join(''));
 
-  window.JST['api/api'] = _.template([
-    '<span class="paren pull-left">(</span>',
-    '<% for (var idx in parameters) { %>',
-      '<div class="parameter pull-left <%= parameters[idx].name %>">',
-        '<div class="parameter-data pull-left"><%= parameters[idx].name %></div>',
-      '</div>',
-      '<span class="pull-left">,&nbsp;</span>',
-    '<% } %>',
-    '<span class="paren pull-left">)</span>'
-    ].join(''));
-
-  window.JST['parameter/json-new-field'] = _.template([
-    '<div class="option new">',
-      '<input placeholder="key" class="option-name option-input" type="text" />:',
-      '<input placeholder="value" class="option-value option-input" type="text" />',
-    '</div>',
-  ].join(''));
-
   window.JST['parameter/json'] = _.template([
-    '<div class="json">',
-    '<div class="json-data">',
-    '<% for (var idx in data) { %>',
-      '<div class="option">',
-      '<span class="option-name"><%= data[idx].name %></span>:',
-      '<input placeholder="value" class="option-value option-input" type="text" />',
-      '</div>',
-    '<% } %>',
-    window.JST['parameter/json-new-field'](),
-    '</div>',
-    '<i class="add-new-field icon-plus-sign"></i>',
+    '<div class="json gone">',
+      '<textarea class="code-editor">{',
+        '\n',
+        '\n',
+        '\n',
+        '}</textarea>',
+      '<button class="code-edit-save">Save</button>',
+      '<button class="code-edit-cancel">Cancel</button>',
     '</div>'
   ].join(''));
 
   window.JST['parameter/string'] = _.template([
-    '<div class="string">',
+    '<div class="string gone">',
     '<div class="string-data">',
       '<input placeholder="<%= name %>" class="option-input" type="text" />',
     '</div>',
     '</div>'
   ].join(''));
+
+  window.JST['api/api'] = _.template([
+    '<span class="paren pull-left">(</span>',
+    '<% for (var idx in parameters) { %>',
+      '<div class="parameter pull-left <%= parameters[idx].name %>">',
+        '<div class="parameter-data pull-left"><%= parameters[idx].name %></div>',
+        '<%= window.JST["parameter/" + parameters[idx].type]() %>',
+      '</div>',
+      '<span class="pull-left">,&nbsp;</span>',
+    '<% } %>',
+    '<span class="paren pull-left">)</span>'
+    ].join(''));
 
   window.JST['doc/index'] = _.template('');
 

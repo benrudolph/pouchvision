@@ -5,7 +5,8 @@ define([
   'backbone',    // lib/backbone/backbone
   'pouchvision',
   'inspector_json'
-], function($, _, Backbone, PouchVision, InspectorJSON){
+  'javascript'
+], function($, _, Backbone, PouchVision, InspectorJSON, CodeMirror){
   // Above we have passed in jQuery, Underscore and Backbone
   // They will not be accessible in the global scope
   return {};

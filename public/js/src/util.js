@@ -13,7 +13,7 @@ define([
     parsedParameters = parameters.map(function(parameter) {
         var parsedParameter;
         if (parameter.type === PouchVision.Types.JSON) {
-          parsedParameter = parameter.data ? parameter.data.getJSON() : {};
+          parsedParameter = (parameter.data || {})
         } else if (parameter.type === PouchVision.Types.STRING) {
           parsedParameter = parameter.data;
         }
@@ -26,6 +26,22 @@ define([
 
     return parsedParameters
 
+  }
+
+  PouchVision.util.parseJSON = function(json) {
+      function parseJSON(json) {
+        var tr = false;
+        try {
+            tr = JSON.parse(json);
+        } catch(err) {
+            try {
+                tr = $.parseJSON(json);
+            } catch(err2) {
+                tr = eval('('+json+')');
+            }
+        }
+        return tr;
+      }
   }
 });
 
