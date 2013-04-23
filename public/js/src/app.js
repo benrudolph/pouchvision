@@ -34,12 +34,12 @@ define([
           'name': 'replicate',
           'parameters': [
             {
-              'name': 'to',
+              'name': 'from',
               'type': PouchVision.Types.STRING,
               'data': ''
             },
             {
-              'name': 'from',
+              'name': 'to',
               'type': PouchVision.Types.STRING,
               'data': ''
             }
