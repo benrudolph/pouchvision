@@ -11,7 +11,7 @@ define([
 
     tagName: 'div',
 
-    className: 'doc',
+    className: 'vision-doc',
 
     initialize: function(options) {
     },

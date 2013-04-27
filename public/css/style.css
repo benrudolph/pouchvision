@@ -5,13 +5,20 @@ body {
 .paren {
   font-size: 30px;
   font-weight: bold;
+  margin-top: -8px;
 }
 
-.environment {
+.environment, .static-container {
   min-height: 100px;
   width: 600px;
   border: 1px rgb(240, 240, 240) solid;
   padding: 10px;
+}
+
+.environment .name {
+  font-weight: 300;
+  text-decoration: underline;
+  padding-bottom: 15px;
 }
 
 .over {
@@ -36,7 +43,7 @@ body {
   margin: 0 0 2px 0;
 }
 
-.docs .doc {
+.vision-docs .vision-doc {
   width: 30px;
   height: 50px;
   border: 1px solid black;
@@ -50,6 +57,11 @@ body {
   margin: 20px 0;
   position: absolute;
   background-color: white;
+}
+
+.response {
+  max-height: 200px;
+  overflow: auto;
 }
 
 .pull-left {

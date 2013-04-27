@@ -60,11 +60,9 @@ define([
               'name': 'options',
               'type': PouchVision.Types.JSON,
               'data': {},
-              'defaults' : [{
-                'name': 'conflicts',
-                'type': PouchVision.Types.BOOLEAN,
-                'value': null
-              }]
+              'defaults' : {
+                'conflicts': false
+              }
             }
           ]
         },
@@ -140,11 +138,14 @@ define([
             {
               'name': 'options',
               'type': PouchVision.Types.JSON,
-              'data': [ {
-                'name': 'conflicts',
-                'type': PouchVision.Types.BOOLEAN,
-                'value': null
-              }]
+              'data': {},
+              'defaults': {
+                'revs': false,
+                'revs_info': false,
+                'open_revs': false,
+                'conflicts': false,
+                'attachments': false
+              }
 
             }]
         },
@@ -155,16 +156,11 @@ define([
               'name': 'options',
               'type': PouchVision.Types.JSON,
               'data': {},
-              'defaults': [ {
-                'name': 'include_docs',
-                'type': PouchVision.Types.BOOLEAN,
-                'value': null
-              },
-              {
-                'name': 'attachments',
-                'type': PouchVision.Types.BOOLEAN,
-                'value': null
-              }]
+              'defaults': {
+                'include_docs': false,
+                'conflicts': false,
+                'attachments': false
+              }
 
            }]
         }

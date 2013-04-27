@@ -26,20 +26,21 @@ define(['underscore'], function(_) {
     ].join(''));
 
   window.JST['environment/show'] = _.template([
-      '<div class="db row">',
-      '<label class=" pull-left">db.</label>',
-      '<select class="api pull-left">',
-        '<% for (var idx in apis) { %>',
-        '<% console.log(apis[idx].name + "|" + model.api) %>',
-          '<option <% if (apis[idx].name === model.api) { %> selected=selected <% } %>><%= apis[idx].name %></option>',
-        '<% } %>',
-      '</select>',
-      '<div class="parameters pull-left"></div>',
-      '<button class="execute btn pull-right">Execute!</button>',
-      '</div>',
-      '<div class="response row"></div>',
-      '<div class="docs row"></div>'
-    ].join(''));
+    '<div class="row name">Name: <%= model.dbname %></div>',
+    '<div class="db row">',
+    '<label class=" pull-left">db.</label>',
+    '<select class="api pull-left">',
+      '<% for (var idx in apis) { %>',
+      '<% console.log(apis[idx].name + "|" + model.api) %>',
+        '<option <% if (apis[idx].name === model.api) { %> selected=selected <% } %>><%= apis[idx].name %></option>',
+      '<% } %>',
+    '</select>',
+    '<div class="parameters pull-left"></div>',
+    '<button class="execute btn pull-right">Execute!</button>',
+    '</div>',
+    '<div class="response row"></div>',
+    '<div class="vision-docs row"></div>'
+  ].join(''));
 
   window.JST['parameter/json'] = _.template([
     '<div class="json gone" data-name="<%= name %>">',

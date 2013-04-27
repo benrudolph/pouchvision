@@ -42,7 +42,9 @@ define([
 
     callback: function(err, response) {
       this.model.set('response', (response || err));
-      this.renderResponse()
+      this.renderResponse();
+      this.renderDocs();
+
     },
 
     execute: function() {
@@ -74,7 +76,16 @@ define([
       );
     },
 
+    renderDocs: function() {
+       this.db.allDocs({ include_docs: true }, function(err, response) {
+         this.docCollection.reset(response.rows);
+         this.docView.render();
+       }.bind(this))
+    },
+
     renderResponse: function() {
+      if (this.inspector)
+        this.inspector.destroy();
       this.inspector = new InspectorJSON({
           element: this.$el.find('.response')
       });
@@ -92,7 +103,7 @@ define([
 
       // Rebind events for existing view that is shown again
       this.apiViews[this.model.get('api')].delegateEvents();
-      this.$el.find('.docs').html(this.docView.render().el);
+      this.$el.find('.vision-docs').html(this.docView.render().el);
 
       this.renderResponse();
 

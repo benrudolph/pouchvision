@@ -11,7 +11,7 @@ define([
     initialize: function(options) {
       console.log("initing docs...")
       this.collection.comparator = function(doc) {
-        return chapter.get("id");
+        return doc.get("id");
       };
     },
 

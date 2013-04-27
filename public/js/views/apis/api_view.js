@@ -76,7 +76,8 @@ define([
       var $param = this.$el.find('.' + parameter.name);
 
       if ($param.find('.' + parameter.type).hasClass('gone')) {
-        this.showParameterDetails(parameter);
+        this.showParameterDetails(parameter,
+            JSON.stringify(parameter.defaults, null, ' '));
       } else {
         this.hideParameterDetails(parameter, true);
       }

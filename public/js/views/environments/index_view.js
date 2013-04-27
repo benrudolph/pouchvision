@@ -23,6 +23,8 @@ define([
         model: _.extend({}, this.statics.at(0))
       });
 
+      this.pouches = [];
+
       this.render();
       this.addAll();
     },
@@ -33,6 +35,9 @@ define([
           element: this.$el.find('.static-response')
       });
       this.inspector.view(JSON.stringify(this.staticResponse));
+      this.pouches.forEach(function(pouch) {
+        pouch.renderDocs();
+      });
     },
 
     execute: function() {
@@ -56,11 +61,11 @@ define([
     },
 
     addOne: function(model) {
-      var view = new PouchVision.Views.EnvironmentShowView({
+      this.pouches.push(new PouchVision.Views.EnvironmentShowView({
         el: model.get('el'),
         model: _.extend({}, model),
         apis: _.extend({}, this.apis)
-      });
+      }));
     }
 
   })
