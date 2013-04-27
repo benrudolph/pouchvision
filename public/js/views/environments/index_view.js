@@ -54,8 +54,13 @@ define([
     },
 
     onAddPouch: function(e) {
+      var name = prompt('Please enter the pouch name');
+
+      if (!name)
+        return
+
       this.collection.add({
-        dbname: 'benny_' + Math.uuid(),
+        dbname: name,
         api: 'post',
         response: {}
       });
@@ -63,7 +68,7 @@ define([
 
     render: function() {
       this.$el.html(this.template());
-      this.$el.find('.static').html(this.staticView.render().el);
+      this.$el.find('.static .parameters').html(this.staticView.render().el);
       return this;
     },
 
