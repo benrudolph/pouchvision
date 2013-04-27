@@ -7,6 +7,10 @@ define([
 ], function($, _, Backbone, InspectorJSON, PouchVision) {
   PouchVision.Views.EnvironmentShowView = Backbone.View.extend({
 
+    tagName: 'div',
+
+    className: 'pouch',
+
     template: JST['environment/show'],
 
     initialize: function(options) {
@@ -108,6 +112,11 @@ define([
       this.renderResponse();
 
       return this;
+    },
+
+    close: function() {
+      this.unbind();
+      this.remove();
     }
 
   })

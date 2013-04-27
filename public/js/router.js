@@ -10,13 +10,11 @@ define([
       this.dbs.reset([
         {
           dbname: 'env-left',
-          el: '#environment-left',
           api: 'post',
           response: {}
         },
         {
           dbname: 'env-right',
-          el: '#environment-right',
           api: 'post',
           response: {}
         }

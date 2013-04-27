@@ -21,8 +21,10 @@ define(['underscore'], function(_) {
     '<div class="static-response row"></div>',
     '<button class="static-execute btn pull-right">Execute!</button>',
     '</div>',
-    '<div class="environment" id="environment-left"></div>',
-    '<div class="environment" id="environment-right"></div>'
+    '<div class="add-pouch-container">',
+      '<button class="add-pouch">+Pouch</button>',
+    '</div>',
+    '<div class="pouches"></div>'
     ].join(''));
 
   window.JST['environment/show'] = _.template([

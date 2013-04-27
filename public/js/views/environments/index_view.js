@@ -10,7 +10,8 @@ define([
     template: JST['environment/index'],
 
     events: {
-      'click .static-execute' : 'execute'
+      'click .static-execute' : 'execute',
+      'click .add-pouch' : 'onAddPouch'
     },
 
     initialize: function(options) {
@@ -50,6 +51,16 @@ define([
       Pouch[staticName].apply(this, parsedParameters);
     },
 
+    onAddPouch: function(e) {
+      this.collection.add({
+        dbname: 'benny_' + Math.uuid(),
+        api: 'post',
+        response: {}
+      });
+      this.pouches.map(function(pouch) { pouch.close(); });
+      this.addAll();
+    },
+
     render: function() {
       this.$el.html(this.template());
       this.$el.find('.static').html(this.staticView.render().el);
@@ -61,11 +72,12 @@ define([
     },
 
     addOne: function(model) {
-      this.pouches.push(new PouchVision.Views.EnvironmentShowView({
-        el: model.get('el'),
+      var view = new PouchVision.Views.EnvironmentShowView({
         model: _.extend({}, model),
         apis: _.extend({}, this.apis)
-      }));
+      });
+      this.pouches.push(view);
+      this.$el.find('.pouches').append(view.el);
     }
 
   })
