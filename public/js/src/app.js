@@ -69,6 +69,52 @@ define([
           ]
         },
         {
+          'name' : 'put',
+          'parameters' : [
+          {
+            'name': 'doc',
+            'type': PouchVision.Types.JSON,
+            'data': {}
+          },
+          {
+            'name': 'options',
+            'type': PouchVision.Types.JSON,
+            'data': {}
+
+          }
+          ]
+        },
+        {
+          'name' : 'bulkDocs',
+          'parameters' : [
+          {
+            'name': 'docs',
+            'type': PouchVision.Types.JSON,
+            'data': {}
+          },
+          {
+            'name': 'options',
+            'type': PouchVision.Types.JSON,
+            'data': {}
+
+          }
+          ]
+        },
+        {
+          'name': 'info',
+          'parameters': []
+        },
+        {
+          'name': 'changes',
+          'paramters': [
+          {
+            'name': 'options',
+            'type': PouchVision.Types.JSON,
+            'data': {}
+          }
+          ]
+        },
+        {
           'name' : 'get',
           'parameters' : [
             {
