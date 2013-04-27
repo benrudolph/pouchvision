@@ -14,6 +14,11 @@ body {
   padding: 10px;
 }
 
+.over {
+  border-radius: 2px;
+  border: 2px solid black;
+}
+
 .parameter .parameter-data {
   cursor: pointer;
   padding: 2px;

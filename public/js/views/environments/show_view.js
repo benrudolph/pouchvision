@@ -41,7 +41,7 @@ define([
     },
 
     callback: function(err, response) {
-      this.model.set('response', response);
+      this.model.set('response', (response || err));
       this.renderResponse()
     },
 

@@ -16,6 +16,17 @@ define([
     initialize: function(options) {
     },
 
+    events: {
+      'dragstart': 'onDragStart'
+    },
+
+    onDragStart: function(e) {
+      console.log('Document dragging started');
+      e.originalEvent.dataTransfer.effectAllowed = 'move';
+      e.originalEvent.dataTransfer.setData('text/plain',
+          JSON.stringify(this.model.get('doc'), null, ' '));
+    },
+
     render: function() {
 
       var color = (Math.abs(this.model.get('id').hashCode() % 0xFFFFFF)).toString(16);
@@ -24,6 +35,7 @@ define([
 
       this.model.set('color', color);
       this.$el.html(this.template());
+      this.$el.attr('draggable', true);
       this.$el.css('background-color', '#' + this.model.get('color'));
 
 

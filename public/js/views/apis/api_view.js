@@ -12,6 +12,10 @@ define([
       'click .parameter-data' : 'onParameterClick',
       'click .code-edit-save' : 'onSave',
       'click .code-edit-cancel' : 'onCancel',
+      'dragenter .parameter.doc' : 'onDragenter',
+      'dragover .parameter.doc' : 'onDragover',
+      'dragleave .parameter.doc' : 'onDragleave',
+      'drop .parameter.doc' : 'onDrop'
     },
 
     initialize: function(options) {
@@ -23,6 +27,45 @@ define([
         styleActiveLine: true,
         lineWrapping: true,
       }
+    },
+
+    onDrop: function(e) {
+      console.log('dropped');
+
+      $target = $(e.target);
+      $target.removeClass('over');
+
+      var parameter = this.model.get('parameters').filter(function(parameter) {
+        return parameter.name === $target.text();
+      })[0];
+
+      if ($target.find('.' + parameter.type).hasClass('gone')) {
+        console.log('hmm...')
+      } else {
+        this.showParameterDetails(parameter, e.originalEvent.dataTransfer.getData('text/plain'));
+      }
+
+
+    },
+
+    onDragenter: function(e) {
+      console.log('entering');
+      $(e.target).addClass('over');
+
+    },
+
+    onDragleave: function(e) {
+      console.log('leaving');
+      $(e.target).removeClass('over');
+    },
+
+    onDragover: function(e) {
+      console.log('over')
+      if (e.preventDefault) {
+        e.preventDefault(); // Necessary. Allows us to drop.
+      }
+
+      return false;
     },
 
     onParameterClick: function(e) {
@@ -39,21 +82,26 @@ define([
       }
     },
 
-    showParameterDetails: function(parameter) {
+    showParameterDetails: function(parameter, value) {
       var $param = this.$el.find('.' + parameter.name);
       var parameters;
 
       // If codemirror is already showing then just return
       $param.find('.' + parameter.type).removeClass('gone');
 
-
       if (parameter.type === PouchVision.Types.JSON && !this.cm[parameter.name]) {
         this.cm[parameter.name] = CodeMirror.fromTextArea($param.find("textarea")[0],
-            $.extend(this.cmOptions, { mode: 'application/json' }));
+            $.extend(this.cmOptions, {
+              mode: 'application/json',
+            }));
       } else if (parameter.type === PouchVision.Types.STRING && !this.cm[parameter.name]) {
         this.cm[parameter.name] = CodeMirror.fromTextArea($param.find("textarea")[0],
-            $.extend(this.cmOptions, { mode: 'text/plain' }));
+            $.extend(this.cmOptions, {
+              mode: 'text/plain',
+            }));
       }
+      if (value)
+        this.cm[parameter.name].setValue(value);
     },
 
     onSave: function(e) {
