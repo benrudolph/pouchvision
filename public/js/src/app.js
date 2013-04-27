@@ -106,7 +106,22 @@ define([
         },
         {
           'name': 'changes',
-          'paramters': [
+          'parameters': [
+          {
+            'name': 'options',
+            'type': PouchVision.Types.JSON,
+            'data': {}
+          }
+          ]
+        },
+        {
+          'name': 'remove',
+          'parameters': [
+          {
+            'name': 'doc',
+            'type': PouchVision.Types.JSON,
+            'data': {}
+          },
           {
             'name': 'options',
             'type': PouchVision.Types.JSON,

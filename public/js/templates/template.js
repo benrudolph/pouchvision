@@ -69,7 +69,9 @@ define(['underscore'], function(_) {
         '<div class="parameter-data pull-left"><%= parameters[idx].name %></div>',
         '<%= window.JST["parameter/" + parameters[idx].type](parameters[idx]) %>',
       '</div>',
+      '<% if (+idx !== parameters.length - 1) { %>',
       '<span class="pull-left">,&nbsp;</span>',
+      '<% } %>',
     '<% } %>',
     '<span class="paren pull-left">)</span>'
     ].join(''));
