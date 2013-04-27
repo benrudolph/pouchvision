@@ -82,6 +82,13 @@ define(['underscore'], function(_) {
   window.JST['doc/index'] = _.template('');
 
   window.JST['doc/doc'] = _.template([
+    '<div class="vision-doc">',
+      '<div class="vision-doc-color"></div>',
+    '</div>',
+    '<div class="vision-popup-container gone">',
+      '<div class="vision-title"><%= title %></div>',
+      '<div class="vision-popup"></div>',
+    '</div>'
   ].join(''));
 
 });

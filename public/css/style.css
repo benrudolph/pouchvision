@@ -18,7 +18,10 @@ body {
   border: 1px rgb(240, 240, 240) solid;
   padding: 10px;
   margin: 5px;
-  display: inline-block;
+}
+
+.pouch {
+  float: left;
 }
 
 .pouch .name {
@@ -53,8 +56,37 @@ body {
   width: 30px;
   height: 50px;
   border: 1px solid black;
-  display: inline-block;
   margin: 2px;
+}
+
+.vision-docs .vision-doc .vision-doc-color {
+  width: 30px;
+  height: 15px;
+  border-bottom: 1px solid black;
+}
+
+.vision-docs .vision-doc.selected {
+  background-color: rgb(210,210,210);
+}
+
+.vision-docs .vision-doc-container {
+  display: inline-block;
+}
+
+.vision-docs .vision-popup-container {
+  position: absolute;
+  background-color: white;
+  border: 1px rgb(240, 240, 240) solid;
+  padding: 5px;
+}
+
+.vision-docs .vision-popup-container .title {
+  text-align: center;
+}
+
+.vision-docs {
+  margin: 5px;
+  height: 50px;
 }
 
 .parameter .json, .parameter .string {
@@ -66,8 +98,10 @@ body {
 }
 
 .response {
-  max-height: 200px;
+  height: 100px;
   overflow: auto;
+  background-color: #ffffd0;
+  margin: 10px;
 }
 
 .pull-left {

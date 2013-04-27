@@ -26,6 +26,8 @@ define([
 
       this.pouches = [];
 
+      this.listenTo(this.collection, 'add', this.addOne);
+
       this.render();
       this.addAll();
     },
@@ -57,8 +59,6 @@ define([
         api: 'post',
         response: {}
       });
-      this.pouches.map(function(pouch) { pouch.close(); });
-      this.addAll();
     },
 
     render: function() {

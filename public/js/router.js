@@ -9,12 +9,12 @@ define([
       this.dbs = new PouchVision.Collections.EnvironmentsCollection();
       this.dbs.reset([
         {
-          dbname: 'env-left',
+          dbname: 'jamesdean',
           api: 'post',
           response: {}
         },
         {
-          dbname: 'env-right',
+          dbname: 'einstein',
           api: 'post',
           response: {}
         }
