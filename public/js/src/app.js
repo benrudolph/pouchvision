@@ -44,6 +44,20 @@ define([
               'data': ''
             }
           ]
+        },
+        {
+          'name': 'allDbs',
+          'parameters': []
+        },
+        {
+          'name': 'destroy',
+          'parameters': [
+          {
+            'name': 'name',
+            'type': PouchVision.Types.JSON,
+            'data': {}
+          }
+          ]
         }
 
       ]

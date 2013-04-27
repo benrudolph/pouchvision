@@ -1,22 +1,14 @@
 define(['underscore'], function(_) {
   window.JST = {}
 
-  window.JST['static/static'] = _.template([
-    '<label class="pull-left">Pouch.<%= name %></label>',
-    '<span class="paren pull-left">(</span>',
-    '<% for (var idx in parameters) { %>',
-      '<div class="parameter pull-left <%= parameters[idx].name %>">',
-        '<div class="parameter-data pull-left"><%= parameters[idx].name %></div>',
-      '</div>',
-      '<span class="pull-left">,&nbsp;</span>',
-    '<% } %>',
-    '<span class="paren pull-left">)</span>',
-    '<button class="execute btn pull-right">Execute!</button>',
-    ].join(''));
-
   window.JST['environment/index'] = _.template([
     '<div class="static-container row">',
-    '<span class="pull-left">Pouch.replicate</span>',
+    '<label class="pull-left">Pouch.</label>',
+    '<select class="static-api pull-left">',
+      '<% for (var idx in statics) { %>',
+        '<option <% if (statics[idx].name === "replicate") { %> selected=selected <% } %>><%= statics[idx].name %></option>',
+      '<% } %>',
+    '</select>',
     '<div class="static row">',
       '<div class="parameters"></div>',
       '<button class="static-execute btn pull-right">Execute!</button>',

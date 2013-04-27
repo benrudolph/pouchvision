@@ -37,7 +37,10 @@ define([
       this.dbView = new PouchVision.Views.EnvironmentIndexView({
         collection: this.dbs,
         apis: this.apis,
-        statics: this.statics
+        statics: this.statics,
+        model: new PouchVision.Models.Environment({
+          staticApi: 'replicate'
+        })
       })
     },
   })

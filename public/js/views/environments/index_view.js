@@ -11,18 +11,19 @@ define([
 
     events: {
       'click .static-execute' : 'execute',
-      'click .add-pouch' : 'onAddPouch'
+      'click .add-pouch' : 'onAddPouch',
+      'change .static-api' : 'changeStaticApi'
     },
 
     initialize: function(options) {
       console.log("starting...")
       this.apis = options.apis;
       this.statics = options.statics;
-      this.staticResponse = {}
+      this.staticResponse = {};
+      this.staticApiViews = {};
 
-      this.staticView = new PouchVision.Views.ApiView({
-        model: _.extend({}, this.statics.at(0))
-      });
+      this.addStaticApi();
+      this.listenTo(this.model, 'change:staticApi', this.addStaticApi);
 
       this.pouches = [];
 
@@ -30,6 +31,14 @@ define([
 
       this.render();
       this.addAll();
+    },
+
+    changeStaticApi: function(e) {
+      var staticApiName = $(e.currentTarget).val();
+
+      this.model.set('staticApi', staticApiName);
+      this.renderStaticApi();
+
     },
 
     callback: function(err, response) {
@@ -44,7 +53,7 @@ define([
     },
 
     execute: function() {
-      var staticName = this.staticView.model.get('name');
+      var staticName = this.model.get('staticApi');
       var static = this.statics.findWhere({ name: staticName });
 
       var parsedParameters = PouchVision.util.parseParameters(static.get('parameters'));
@@ -66,10 +75,30 @@ define([
       });
     },
 
+    addStaticApi: function() {
+      if (this.staticApiViews[this.model.get('staticApi')]) {
+        return;
+      }
+
+      var staticApiModel = this.statics.findWhere({
+        'name': this.model.get('staticApi')
+      });
+
+      this.staticApiViews[this.model.get('staticApi')] = new PouchVision.Views.ApiView({
+        model: staticApiModel,
+      });
+    },
+
     render: function() {
-      this.$el.html(this.template());
-      this.$el.find('.static .parameters').html(this.staticView.render().el);
+      this.$el.html(this.template({ statics: this.statics.toJSON() }));
+      this.renderStaticApi();
       return this;
+    },
+
+    renderStaticApi: function() {
+      this.$el.find('.static .parameters').html(
+          this.staticApiViews[this.model.get('staticApi')].render().el);
+      this.staticApiViews[this.model.get('staticApi')].delegateEvents();
     },
 
     addAll: function() {
