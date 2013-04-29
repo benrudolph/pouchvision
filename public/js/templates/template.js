@@ -2,6 +2,7 @@ define(['underscore'], function(_) {
   window.JST = {}
 
   window.JST['environment/index'] = _.template([
+    '<h2>Static Pouch</h2>',
     '<div class="static-container row">',
     '<label class="pull-left">Pouch.</label>',
     '<select class="static-api pull-left">',
@@ -18,7 +19,9 @@ define(['underscore'], function(_) {
     '<div class="add-pouch-container">',
       '<button class="add-pouch">+Pouch</button>',
     '</div>',
-    '<div class="pouches"></div>'
+    '<div class="pouches">',
+      '<h2>Pouch Instances</h2>',
+    '</div>'
     ].join(''));
 
   window.JST['environment/show'] = _.template([
@@ -45,6 +48,18 @@ define(['underscore'], function(_) {
         '\n',
         '\n',
       '}</textarea>',
+      '<button class="code-edit-save">Save</button>',
+      '<button class="code-edit-cancel">Cancel</button>',
+    '</div>'
+  ].join(''));
+
+  window.JST['parameter/array'] = _.template([
+    '<div class="array gone" data-name="<%= name %>">',
+      '<textarea class="code-editor">[{',
+        '\n',
+        '\n',
+        '\n',
+      '}]</textarea>',
       '<button class="code-edit-save">Save</button>',
       '<button class="code-edit-cancel">Cancel</button>',
     '</div>'

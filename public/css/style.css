@@ -2,6 +2,10 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+h1, h2 {
+  font-weight: 300;
+}
+
 .paren {
   font-size: 30px;
   font-weight: 300;
@@ -10,6 +14,7 @@ body {
 
 .pouches {
   width: 1100px;
+  padding: 3px;
 }
 
 .pouch, .static-container {
@@ -89,7 +94,7 @@ body {
   height: 50px;
 }
 
-.parameter .json, .parameter .string {
+.parameter .json, .parameter .string, .parameter .array {
   width: 380px;
   border: 1px rgb(240, 240, 240) solid;
   margin: 20px 0;

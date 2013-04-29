@@ -13,7 +13,9 @@ define([
     parsedParameters = parameters.map(function(parameter) {
         var parsedParameter;
         if (parameter.type === PouchVision.Types.JSON) {
-          parsedParameter = (parameter.data || {})
+          parsedParameter = (parameter.data || {});
+        } else if (parameter.type === PouchVision.Types.ARRAY) {
+          parsedParameter = (parameter.data || []);
         } else if (parameter.type === PouchVision.Types.STRING) {
           parsedParameter = (parameter.data || '');
         }

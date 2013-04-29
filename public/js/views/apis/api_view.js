@@ -106,7 +106,7 @@ define([
             }));
       }
       if (value)
-        this.cm[parameter.name].setValue(JSON.parse(value));
+        this.cm[parameter.name].setValue(value);
     },
 
     onSave: function(e) {
@@ -138,6 +138,16 @@ define([
         } catch (err) {
             console.error(err);
         }
+      } else if (parameter.type === PouchVision.Types.ARRAY) {
+        try {
+          if (!value || value[0] !== '[' || value[value.length-1] !== ']' ||
+            (value = PouchVision.util.parseJSON(value)) === false) {
+              throw("Not a valid array");
+            }
+        } catch (err) {
+            console.error(err);
+        }
+
       } else if (parameter.type === PouchVision.Types.STRING) {
         try {
           if (!value) throw("Not a valid string");

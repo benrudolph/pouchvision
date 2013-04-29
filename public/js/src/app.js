@@ -27,7 +27,8 @@ define([
       PouchVision.Types = {
         JSON: 'json',
         STRING: 'string',
-        BOOLEAN: 'boolean'
+        BOOLEAN: 'boolean',
+        ARRAY: 'array'
       }
       PouchVision.Statics = [
         {
@@ -54,8 +55,8 @@ define([
           'parameters': [
           {
             'name': 'name',
-            'type': PouchVision.Types.JSON,
-            'data': {}
+            'type': PouchVision.Types.STRING,
+            'data': ''
           }
           ]
         }
@@ -102,7 +103,8 @@ define([
           {
             'name': 'docs',
             'type': PouchVision.Types.JSON,
-            'data': {}
+            'data': { 'docs': [] },
+            'defaults': { 'docs': [] },
           },
           {
             'name': 'options',
