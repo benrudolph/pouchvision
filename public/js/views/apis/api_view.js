@@ -86,23 +86,27 @@ define([
     showParameterDetails: function(parameter, value) {
       var $param = this.$el.find('.' + parameter.name);
       var parameters;
+      var mode;
 
       // If codemirror is already showing then just return
       $param.find('.' + parameter.type).removeClass('gone');
 
-      if (parameter.type === PouchVision.Types.JSON && !this.cm[parameter.name]) {
-        this.cm[parameter.name] = CodeMirror.fromTextArea($param.find("textarea")[0],
-            $.extend(this.cmOptions, {
-              mode: 'application/json',
-            }));
+
+      if ((parameter.type === PouchVision.Types.JSON ||
+            parameter.type === PouchVision.Types.ARRAY)) {
+        mode = 'application/json';
       } else if (parameter.type === PouchVision.Types.STRING && !this.cm[parameter.name]) {
+        mode = 'text/plain';
+      }
+
+      if (this.$el.find('.parameter.' + parameter.name + ' .CodeMirror').length === 0) {
         this.cm[parameter.name] = CodeMirror.fromTextArea($param.find("textarea")[0],
             $.extend(this.cmOptions, {
-              mode: 'text/plain',
+              mode: mode,
             }));
       }
       if (value)
-        this.cm[parameter.name].setValue(value);
+        this.cm[parameter.name].setValue(JSON.parse(value));
     },
 
     onSave: function(e) {
