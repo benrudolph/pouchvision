@@ -42,7 +42,7 @@ define([
     },
 
     callback: function(err, response) {
-      this.staticResponse = response;
+      this.staticResponse = (err || response);
       this.inspector = new InspectorJSON({
           element: this.$el.find('.static-response')
       });
