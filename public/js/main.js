@@ -14,6 +14,7 @@ require.config({
     'codemirror': 'libs/codemirror',
     'javascript': 'libs/javascript',
     'pouchvision': 'src/pouchvision',
+    'intro': 'libs/intro',
   },
   shim: {
     'underscore': {
@@ -55,6 +56,10 @@ require.config({
     'jquery-color': {
       deps: ['jquery'],
       exports: 'jquery-color'
+    },
+    'intro': {
+      deps: [],
+      exports: 'introJs'
     }
   }
 });

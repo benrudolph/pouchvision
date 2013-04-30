@@ -25,6 +25,21 @@ define([
 
       window.store = store // Hack to get store in global namespace. Need to fix
 
+      var o = $({});
+
+      $.subscribe = function() {
+        o.on.apply(o, arguments);
+      };
+
+      $.unsubscribe = function() {
+        o.off.apply(o, arguments);
+      };
+
+      $.publish = function() {
+        o.trigger.apply(o, arguments);
+      };
+
+
       PouchVision.Types = {
         JSON: 'json',
         STRING: 'string',

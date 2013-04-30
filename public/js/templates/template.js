@@ -30,7 +30,6 @@ define(['underscore'], function(_) {
     '<label class=" pull-left">db.</label>',
     '<select class="api pull-left">',
       '<% for (var idx in apis) { %>',
-      '<% console.log(apis[idx].name + "|" + model.api) %>',
         '<option <% if (apis[idx].name === model.api) { %> selected=selected <% } %>>',
         '<%= apis[idx].name %>',
         '</option>',

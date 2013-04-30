@@ -6,6 +6,11 @@ h1, h2 {
   font-weight: 300;
 }
 
+#pouch-vision {
+  margin: auto;
+  width: 1100px;
+}
+
 .paren {
   font-size: 30px;
   font-weight: 300;

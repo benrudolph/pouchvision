@@ -27,6 +27,10 @@ define([
 
           this.docView = new PouchVision.Views.DocIndexView({ collection: this.docCollection });
           this.render();
+          if (this.model.get('intro')) {
+            console.log('publishing..')
+            $.publish('ready');
+          }
         }.bind(this));
       }.bind(this))
     },
@@ -97,11 +101,20 @@ define([
     },
 
     render: function() {
-      console.log(this.apis.toJSON());
+      var $param;
       this.$el.html(this.template({
         model: this.model.toJSON(),
         apis: this.apis.toJSON(),
       }));
+
+      if (this.model.get('intro')) {
+        this.$el.attr('data-intro', 'This is a Pouch instance. You can do cool things with it.');
+        this.$el.attr('data-step', '4');
+
+        $param = this.$el.find('.parameter').first();
+        $param.attr('data-intro', 'You can click that parameter to customize the input. Also feel free to drag and drop documents on to parameters named \'doc\'');
+
+      }
 
       this.$el.find('.parameters').html(this.apiViews[this.model.get('api')].render().el);
 
