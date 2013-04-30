@@ -109,8 +109,10 @@ define([
           {
             'name': 'options',
             'type': PouchVision.Types.JSON,
-            'data': {}
-
+            'data': {},
+            'defaults': {
+              'new_edits': false
+            }
           }
           ]
         },
@@ -160,7 +162,10 @@ define([
                 'revs_info': false,
                 'open_revs': false,
                 'conflicts': false,
-                'attachments': false
+                'attachments': false,
+                'startkey': "",
+                'endkey': "",
+                'keys': []
               }
 
             }]
@@ -175,7 +180,9 @@ define([
               'defaults': {
                 'include_docs': false,
                 'conflicts': false,
-                'attachments': false
+                'attachments': false,
+                'descending': false,
+
               }
 
            }]
