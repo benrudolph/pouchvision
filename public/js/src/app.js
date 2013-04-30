@@ -78,7 +78,8 @@ define([
               'data': {},
               'defaults' : {
                 'conflicts': false
-              }
+              },
+              'optional': true
             }
           ]
         },
@@ -113,7 +114,8 @@ define([
             'data': {},
             'defaults': {
               'new_edits': false
-            }
+            },
+            'optional': true
           }
           ]
         },

@@ -51,6 +51,10 @@ require.config({
     'backbone': {
       deps: ['underscore', 'jquery'],
       exports: 'Backbone'
+    },
+    'jquery-color': {
+      deps: ['jquery'],
+      exports: 'jquery-color'
     }
   }
 });

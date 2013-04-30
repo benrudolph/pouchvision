@@ -47,6 +47,8 @@ define([
           element: this.$el.find('.static-response')
       });
       this.inspector.view(JSON.stringify(this.staticResponse));
+      if (err)
+        return;
       this.pouches.forEach(function(pouch) {
         pouch.renderDocs();
       });

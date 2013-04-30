@@ -35,18 +35,15 @@ h1, h2 {
   padding-bottom: 15px;
 }
 
-.over {
-  border: 1px solid black;
-}
-
 .parameter .parameter-data {
   border-radius: 2px;
   cursor: pointer;
   padding: 2px;
 }
 
-.parameter .parameter-data:hover {
-  border: 1px solid black;
+.parameter .parameter-data:hover, .over {
+  font-style: italic;
+  text-decoration: underline;
 }
 
 .parameter input.option-input {
