@@ -14,6 +14,8 @@ define([
     className: 'vision-doc-container',
 
     initialize: function(options) {
+      this.dragImg = document.createElement("img");
+      this.dragImg.src = '/img/doc.png';
     },
 
     events: {
@@ -26,6 +28,7 @@ define([
       e.originalEvent.dataTransfer.effectAllowed = 'move';
       e.originalEvent.dataTransfer.setData('text/plain',
           JSON.stringify(this.model.get('doc'), null, ' '));
+      e.originalEvent.dataTransfer.setDragImage(this.dragImg, 0, 0);
     },
 
     onClick: function(e) {
