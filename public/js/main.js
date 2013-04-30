@@ -1,6 +1,7 @@
 require.config({
   paths: {
     'jquery': 'libs/jquery',
+    'jquery-color': 'libs/jquery-color',
     'backbone': 'libs/backbone',
     'underscore': 'libs/underscore',
     'd3': 'libs/d3.v3',
@@ -12,7 +13,7 @@ require.config({
     'inspector_json': 'libs/inspector_json',
     'codemirror': 'libs/codemirror',
     'javascript': 'libs/javascript',
-    'pouchvision': 'src/pouchvision'
+    'pouchvision': 'src/pouchvision',
   },
   shim: {
     'underscore': {

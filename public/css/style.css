@@ -36,18 +36,17 @@ h1, h2 {
 }
 
 .over {
-  border-radius: 2px;
-  border: 2px solid black;
+  border: 1px solid black;
 }
 
 .parameter .parameter-data {
+  border-radius: 2px;
   cursor: pointer;
   padding: 2px;
-  margin: 0 padding2px;
 }
 
 .parameter .parameter-data:hover {
-  background-color: rgb(240,240,240);
+  border: 1px solid black;
 }
 
 .parameter input.option-input {
@@ -97,7 +96,7 @@ h1, h2 {
 .parameter .json, .parameter .string, .parameter .array {
   width: 380px;
   border: 1px rgb(240, 240, 240) solid;
-  margin: 20px 0;
+  margin: 25px 0;
   position: absolute;
   background-color: white;
 }

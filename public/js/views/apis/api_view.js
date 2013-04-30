@@ -3,7 +3,7 @@ define([
   'underscore', // lib/underscore/underscore
   'backbone',    // lib/backbone/backbone
   'pouchvision',
-  'javascript'
+  'javascript',
 ], function($, _, Backbone, PouchVision, CodeMirror){
   PouchVision.Views.ApiView = Backbone.View.extend({
     template: window.JST['api/api'],
@@ -113,6 +113,7 @@ define([
       var parameter = this.model.get('parameters').filter(function(parameter) {
         return parameter.name === $(e.target).parent().data('name');
       })[0];
+
       this.hideParameterDetails(parameter, true);
     },
 
@@ -134,18 +135,22 @@ define([
           if (!value || value[0] !== '{' || value[value.length-1] !== '}' ||
             (value = PouchVision.util.parseJSON(value)) === false) {
               throw("Not a valid object");
+              return false;
             }
         } catch (err) {
             console.error(err);
+              return false;
         }
       } else if (parameter.type === PouchVision.Types.ARRAY) {
         try {
           if (!value || value[0] !== '[' || value[value.length-1] !== ']' ||
             (value = PouchVision.util.parseJSON(value)) === false) {
               throw("Not a valid array");
+              return false;
             }
         } catch (err) {
             console.error(err);
+            return false;
         }
 
       } else if (parameter.type === PouchVision.Types.STRING) {
@@ -156,6 +161,7 @@ define([
           }
         } catch(err) {
           console.log(err);
+          return false;
         }
         console.log(value)
       }
@@ -170,13 +176,32 @@ define([
       })
       this.model.set('parameters', parameters);
 
+      return true;
+
     },
 
     hideParameterDetails: function(parameter, save) {
       var $param = this.$el.find('.' + parameter.name);
       $param.find('.' + parameter.type).addClass('gone');
-      if (save)
-        this.save(parameter);
+      var success;
+
+      if (save) {
+        success = this.save(parameter);
+        this.flashParam($param, success);
+      }
+    },
+
+    flashParam: function($param, success) {
+      var color = success ? '#43ce43' : '#d01129';
+      var speed = 100;
+      $param.animate({
+        'background-color': color
+      }, speed, function() {
+        $param.animate({
+          'background-color': 'white'
+        }, speed)
+      });
+
     },
 
     render: function() {

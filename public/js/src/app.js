@@ -8,6 +8,7 @@ define([
     'templates',
     'store',
     'javascript',
+    'jquery-color',
     '/js/models/api.js', /* Models/Collections */
     '/js/models/environment.js',
     '/js/models/doc.js',
