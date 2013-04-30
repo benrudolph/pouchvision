@@ -7,24 +7,13 @@ define([
   PouchVision.Routers.MainRouter = Backbone.Router.extend({
     initialize: function() {
       this.dbs = new PouchVision.Collections.EnvironmentsCollection();
-      this.dbs.reset([
-        {
-          dbname: 'jamesdean',
-          api: 'post',
-          response: {}
-        },
-        {
-          dbname: 'einstein',
-          api: 'post',
-          response: {}
-        }
-      ])
 
       this.apis = new PouchVision.Collections.ApisCollection();
       this.apis.reset(PouchVision.Apis)
 
       this.statics = new PouchVision.Collections.StaticsCollection();
       this.statics.reset(PouchVision.Statics)
+
     },
 
     routes: {
@@ -34,14 +23,36 @@ define([
     },
 
     index: function() {
-      this.dbView = new PouchVision.Views.EnvironmentIndexView({
-        collection: this.dbs,
-        apis: this.apis,
-        statics: this.statics,
-        model: new PouchVision.Models.Environment({
-          staticApi: 'replicate'
+      Pouch.allDbs(function(err, response) {
+        if (err) {
+          console.err(err);
+        }
+
+        var dbs = [];
+        var defaultDbs = [ 'jamesdean', 'einstein' ];
+
+        response = _.union(response, defaultDbs);
+
+        response.forEach(function(dbname) {
+          dbs.push({
+            dbname: dbname,
+            api: 'post',
+            response: {}
+          })
+        });
+
+        this.dbs.reset(dbs)
+        this.dbView = new PouchVision.Views.EnvironmentIndexView({
+          collection: this.dbs,
+          apis: this.apis,
+          statics: this.statics,
+          model: new PouchVision.Models.Environment({
+            staticApi: 'replicate'
+          })
         })
-      })
+
+      }.bind(this))
+
     },
   })
 
