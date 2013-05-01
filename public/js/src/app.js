@@ -198,6 +198,64 @@ define([
               'optional': true
 
            }]
+        },
+        {
+          'name': 'putAttachment',
+          'parameters': [
+          {
+            'name': 'id',
+            'type': PouchVision.Types.STRING,
+            'data': ''
+          },
+          {
+            'name': 'rev',
+            'type': PouchVision.Types.STRING,
+            'data': ''
+          },
+          {
+            'name': 'doc',
+            'type': PouchVision.Types.JSON,
+            'data': {}
+          },
+          {
+            'name': 'type',
+            'type': PouchVision.Types.STRING,
+            'data': ''
+          }
+            ]
+        },
+        {
+          'name': 'getAttachment',
+          'parameters': [
+          {
+            'name': 'id',
+            'type': PouchVision.Types.STRING
+          }
+            ]
+        },
+        {
+          'name': 'removeAttachment',
+          'parameters': [
+          {
+            'name': 'id',
+            'type': PouchVision.Types.STRING,
+            'data': ''
+          },
+          {
+            'name': 'rev',
+            'type': PouchVision.Types.STRING,
+            'data': ''
+          }
+            ]
+        },
+        {
+          'name': 'compact',
+          'parameters': []
+          {
+            'name': 'options',
+            'type': PouchVision.Types.STRING,
+            'data': ''
+          }
         }
       ]
 
