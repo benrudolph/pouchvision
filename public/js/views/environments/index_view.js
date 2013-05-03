@@ -68,7 +68,7 @@ define([
       var name = prompt('Please enter the pouch name');
 
       if (!name)
-        return
+        return;
 
       this.collection.add({
         dbname: name,

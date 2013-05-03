@@ -37,6 +37,8 @@ u {
 
 .tip {
   font-size: 14px;
+  margin-bottom: 20px;
+  display: block;
 }
 
 .topbar {
