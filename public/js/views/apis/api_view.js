@@ -12,10 +12,10 @@ define([
       'click .parameter-data' : 'onParameterClick',
       'click .code-edit-save' : 'onSave',
       'click .code-edit-cancel' : 'onCancel',
-      'dragenter .parameter.doc' : 'onDragenter',
-      'dragover .parameter.doc' : 'onDragover',
-      'dragleave .parameter.doc' : 'onDragleave',
-      'drop .parameter.doc' : 'onDrop'
+      'dragenter .parameter.doc, .parameter.docid' : 'onDragenter',
+      'dragover .parameter.doc, .parameter.docid' : 'onDragover',
+      'dragleave .parameter.doc, .parameter.docid' : 'onDragleave',
+      'drop .parameter.doc, .parameter.docid' : 'onDrop'
     },
 
     initialize: function(options) {
@@ -35,6 +35,7 @@ define([
       $target = $(e.target);
       $target.removeClass('over');
 
+      var value;
       var parameter = this.model.get('parameters').filter(function(parameter) {
         return parameter.name === $target.text();
       })[0];
@@ -42,7 +43,11 @@ define([
       if ($target.find('.' + parameter.type).hasClass('gone')) {
         console.log('hmm...')
       } else {
-        this.showParameterDetails(parameter, e.originalEvent.dataTransfer.getData('text/plain'));
+        value = JSON.parse(e.originalEvent.dataTransfer.getData('text/plain'));
+        if ($(e.currentTarget).hasClass('docid')) {
+          value = value._id;
+        }
+        this.showParameterDetails(parameter, JSON.stringify(value, null, ' '));
       }
 
 

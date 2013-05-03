@@ -250,12 +250,13 @@ define([
         },
         {
           'name': 'compact',
-          'parameters': []
+          'parameters': [
           {
             'name': 'options',
             'type': PouchVision.Types.STRING,
             'data': ''
           }
+          ]
         }
       ]
 
