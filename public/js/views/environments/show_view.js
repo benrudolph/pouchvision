@@ -107,14 +107,6 @@ define([
         apis: this.apis.toJSON(),
       }));
 
-      if (this.model.get('intro')) {
-        this.$el.attr('data-intro', 'This is a Pouch instance. You can do cool things with it.');
-        this.$el.attr('data-step', '4');
-
-        $param = this.$el.find('.parameter').first();
-        $param.attr('data-intro', 'You can click that parameter to customize the input. Also feel free to drag and drop documents on to parameters named \'doc\'');
-
-      }
 
       this.$el.find('.parameters').html(this.apiViews[this.model.get('api')].render().el);
 

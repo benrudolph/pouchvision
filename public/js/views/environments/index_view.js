@@ -61,6 +61,17 @@ define([
       var parsedParameters = PouchVision.util.parseParameters(static.get('parameters'));
 
       parsedParameters.push(this.callback.bind(this));
+      if (staticName === 'destroy') {
+        var deletedPouch = this.collection.findWhere({ dbname: parsedParameters[0] });
+        this.collection.remove(deletedPouch);
+        this.pouches = this.pouches.filter(function(pouch) {
+          if (pouch.model.get('dbname') === deletedPouch.get('dbname')) {
+            pouch.close();
+            return false;
+          }
+          return true;
+        });
+      }
       Pouch[staticName].apply(this, parsedParameters);
     },
 
