@@ -4,6 +4,11 @@ body {
   margin: 0px;
 }
 
+a {
+  color: black;
+  font-style: italic;
+}
+
 h1, h2 {
   font-weight: 300;
 }
@@ -35,6 +40,7 @@ u {
   position: relative;
 }
 
+
 .tip {
   font-size: 14px;
   margin-bottom: 20px;
@@ -58,6 +64,22 @@ u {
   font-size: 14px;
 }
 
+.btn {
+  color: #2c3e50;
+  border: 1px solid #2c3e50;
+  background-color: #ecf0f1;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #bdc3c7;
+}
+
+.btn:active {
+  background-color: #95a5a6;
+}
+
 .paren {
   font-size: 30px;
   font-weight: 300;
@@ -72,9 +94,9 @@ u {
 .pouch, .static-container {
   min-height: 100px;
   width: 500px;
-  border: 1px rgb(240, 240, 240) solid;
   padding: 10px;
   margin: 5px;
+  border: 1px solid #2c3e50;
 }
 
 .pouch {
@@ -129,7 +151,7 @@ u {
 .vision-docs .vision-popup-container {
   position: absolute;
   background-color: white;
-  border: 1px rgb(240, 240, 240) solid;
+  border: 1px #2c3e50 solid;
   padding: 5px;
 }
 
@@ -138,8 +160,9 @@ u {
 }
 
 .vision-docs {
-  margin: 5px;
-  height: 50px;
+  margin: 5px 0;
+  height: 59px;
+  overflow: auto;
 }
 
 .parameter .json, .parameter .string, .parameter .array {
@@ -154,7 +177,8 @@ u {
   height: 100px;
   overflow: auto;
   background-color: #ffffd0;
-  margin: 10px;
+  margin: 10px 0;
+  border: 1px solid #2c3e50;
 }
 
 .pull-left {

@@ -19,7 +19,7 @@ define(['underscore'], function(_) {
     '<div class="pouch-header">',
       '<h2>Pouch Instances</h2>',
       '<div class="add-pouch-container">',
-        '<button class="add-pouch">+Pouch</button>',
+        '<button class="add-pouch btn">+Pouch</button>',
       '</div>',
     '</div>',
     '<div class="pouches">',
