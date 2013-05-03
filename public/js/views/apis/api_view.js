@@ -12,10 +12,10 @@ define([
       'click .parameter-data' : 'onParameterClick',
       'click .code-edit-save' : 'onSave',
       'click .code-edit-cancel' : 'onCancel',
-      'dragenter .parameter.doc, .parameter.docid' : 'onDragenter',
-      'dragover .parameter.doc, .parameter.docid' : 'onDragover',
-      'dragleave .parameter.doc, .parameter.docid' : 'onDragleave',
-      'drop .parameter.doc, .parameter.docid' : 'onDrop'
+      'dragenter .parameter.doc, .parameter.docid, .parameter.rev' : 'onDragenter',
+      'dragover .parameter.doc, .parameter.docid, .parameter.rev' : 'onDragover',
+      'dragleave .parameter.doc, .parameter.docid, .parameter.rev' : 'onDragleave',
+      'drop .parameter.doc, .parameter.docid, .parameter.rev' : 'onDrop'
     },
 
     initialize: function(options) {
@@ -46,6 +46,8 @@ define([
         value = JSON.parse(e.originalEvent.dataTransfer.getData('text/plain'));
         if ($(e.currentTarget).hasClass('docid')) {
           value = value._id;
+        } else if ($(e.currentTarget).hasClass('rev')) {
+          value = value._rev;
         }
         this.showParameterDetails(parameter, JSON.stringify(value, null, ' '));
       }
