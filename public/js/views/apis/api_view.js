@@ -31,6 +31,7 @@ define([
 
     onDrop: function(e) {
       console.log('dropped');
+      e.preventDefault(); // Necessary. Allows us to drop.
 
       $target = $(e.target);
       $target.removeClass('over');

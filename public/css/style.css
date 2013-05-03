@@ -1,14 +1,59 @@
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #2c3e50;
+  margin: 0px;
 }
 
 h1, h2 {
   font-weight: 300;
 }
+h2 {
+  margin: 10px;
+  display: inline-block;
+}
+
+u {
+  font-size: 24px;
+}
 
 #pouch-vision {
-  margin: auto;
   width: 1100px;
+  position: absolute;
+  left: 230px;
+  top: 0px;
+  border-left: #2c3e50 1px solid;
+  padding-left: 20px;
+}
+
+.add-pouch-container {
+  margin-left: 15px;
+  display: inline-block;
+}
+
+.content {
+  width: 1300px;
+  position: relative;
+}
+
+.tip {
+  font-size: 14px;
+}
+
+.topbar {
+  width: 100%;
+  padding-left: 40px;
+  border-bottom: 3px #2c3e50 dashed;
+  color: #2c3e50;
+  background-color: #ecf0f1;
+  margin: 0px;
+}
+
+.leftbar {
+  width: 210px;
+  position: relative;
+  left: 0px;
+  margin: 15px;
+  font-size: 14px;
 }
 
 .paren {

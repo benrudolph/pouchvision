@@ -16,11 +16,13 @@ define(['underscore'], function(_) {
     '</div>',
     '<div class="response static-response row"></div>',
     '</div>',
-    '<div class="add-pouch-container">',
-      '<button class="add-pouch">+Pouch</button>',
+    '<div class="pouch-header">',
+      '<h2>Pouch Instances</h2>',
+      '<div class="add-pouch-container">',
+        '<button class="add-pouch">+Pouch</button>',
+      '</div>',
     '</div>',
     '<div class="pouches">',
-      '<h2>Pouch Instances</h2>',
     '</div>'
     ].join(''));
 
