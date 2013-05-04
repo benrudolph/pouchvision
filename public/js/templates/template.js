@@ -100,6 +100,7 @@ define(['underscore'], function(_) {
       '<div class="vision-doc-color"></div>',
     '</div>',
     '<div class="vision-popup-container gone">',
+      '<div class="arrow-up"></div>',
       '<div class="vision-title"><%= title %></div>',
       '<div class="vision-popup"></div>',
     '</div>'

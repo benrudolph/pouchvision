@@ -93,7 +93,7 @@ u {
 
 .pouch, .static-container {
   min-height: 100px;
-  width: 500px;
+  width: 400px;
   padding: 10px;
   margin: 5px;
   border: 1px solid #2c3e50;
@@ -151,8 +151,10 @@ u {
 .vision-docs .vision-popup-container {
   position: absolute;
   background-color: white;
+  margin: 7px 0;
   border: 1px #2c3e50 solid;
   padding: 5px;
+  width: 385px;
 }
 
 .vision-docs .vision-popup-container .title {
@@ -163,6 +165,16 @@ u {
   margin: 5px 0;
   height: 59px;
   overflow: auto;
+}
+
+.arrow-up {
+	width: 0;
+	height: 0;
+  position: absolute;
+  top: -10px;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid #2c3e50;
 }
 
 .parameter .json, .parameter .string, .parameter .array {
