@@ -95,6 +95,7 @@ define([
       var $param = this.$el.find('.' + parameter.name);
       var parameters;
       var mode;
+      var pos;
 
       // If codemirror is already showing then just return
       $param.find('.' + parameter.type).removeClass('gone');
@@ -103,8 +104,10 @@ define([
       if ((parameter.type === PouchVision.Types.JSON ||
             parameter.type === PouchVision.Types.ARRAY)) {
         mode = 'application/json';
+        pos = { line: 1, ch: 1 };
       } else if (parameter.type === PouchVision.Types.STRING && !this.cm[parameter.name]) {
         mode = 'text/plain';
+        pos = { line: 0, ch: 1 };
       }
 
       if (this.$el.find('.parameter.' + parameter.name + ' .CodeMirror').length === 0) {
@@ -113,8 +116,10 @@ define([
               mode: mode,
             }));
       }
+      this.cm[parameter.name].setCursor(pos);
       if (value)
         this.cm[parameter.name].setValue(value);
+
     },
 
     onSave: function(e) {
