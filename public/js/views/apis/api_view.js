@@ -100,12 +100,11 @@ define([
       // If codemirror is already showing then just return
       $param.find('.' + parameter.type).removeClass('gone');
 
-
       if ((parameter.type === PouchVision.Types.JSON ||
             parameter.type === PouchVision.Types.ARRAY)) {
         mode = 'application/json';
         pos = { line: 1, ch: 1 };
-      } else if (parameter.type === PouchVision.Types.STRING && !this.cm[parameter.name]) {
+      } else if (parameter.type === PouchVision.Types.STRING) {
         mode = 'text/plain';
         pos = { line: 0, ch: 1 };
       }
