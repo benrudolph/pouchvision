@@ -56,6 +56,14 @@ define(['underscore'], function(_) {
     '</div>'
   ].join(''));
 
+  window.JST['parameter/attachment'] = _.template([
+    '<div class="attachment gone" data-name="<%= name %>">',
+      '<textarea class="code-editor">new Blob([])</textarea>',
+      '<button class="code-edit-save">Save</button>',
+      '<button class="code-edit-cancel">Cancel</button>',
+    '</div>'
+  ].join(''));
+
   window.JST['parameter/array'] = _.template([
     '<div class="array gone" data-name="<%= name %>">',
       '<textarea class="code-editor">[{',

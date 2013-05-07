@@ -177,7 +177,7 @@ u {
 	border-bottom: 10px solid #2c3e50;
 }
 
-.parameter .json, .parameter .string, .parameter .array {
+.parameter .json, .parameter .string, .parameter .array, .parameter .attachment {
   width: 380px;
   border: 1px rgb(240, 240, 240) solid;
   margin: 25px 0;

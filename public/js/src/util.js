@@ -18,6 +18,8 @@ define([
           parsedParameter = (parameter.data || []);
         } else if (parameter.type === PouchVision.Types.STRING) {
           parsedParameter = (parameter.data || '');
+        } else if (parameter.type === PouchVision.Types.ATTACHMENT) {
+          parsedParameter = (parameter.data || new Blob([]));
         }
 
         return parsedParameter;

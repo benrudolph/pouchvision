@@ -44,7 +44,8 @@ define([
         JSON: 'json',
         STRING: 'string',
         BOOLEAN: 'boolean',
-        ARRAY: 'array'
+        ARRAY: 'array',
+        ATTACHMENT: 'attachment'
       }
       PouchVision.Statics = [
         {
@@ -214,7 +215,7 @@ define([
           },
           {
             'name': 'doc',
-            'type': PouchVision.Types.JSON,
+            'type': PouchVision.Types.ATTACHMENT,
             'data': {}
           },
           {

@@ -107,6 +107,9 @@ define([
       } else if (parameter.type === PouchVision.Types.STRING) {
         mode = 'text/plain';
         pos = { line: 0, ch: 1 };
+      } else if (parameter.type === PouchVision.Types.ATTACHMENT) {
+        mode = 'text/javascript';
+        pos = { line: 0, ch: 10 };
       }
 
       if (this.$el.find('.parameter.' + parameter.name + ' .CodeMirror').length === 0) {
@@ -176,6 +179,16 @@ define([
           return false;
         }
         console.log(value)
+      } else if (parameter.type === PouchVision.Types.ATTACHMENT) {
+        try {
+          if (!value) throw("Not a valid attachment");
+          value = eval(value);
+          if (value.toString() !== '[object Blob]') throw("Not a valid attachment");
+        } catch(err) {
+          console.log(err);
+          return false;
+        }
+        console.log(value);
       }
 
       parameter.data = value;
