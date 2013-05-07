@@ -31,14 +31,14 @@ define([
 
           this.docView = new PouchVision.Views.DocIndexView({ collection: this.docCollection });
           this.render();
+          if (this.options.callback) {
+            this.options.callback();
+          }
           if (this.model.get('intro')) {
             console.log('publishing..')
             $.publish('ready');
           }
 
-          if (this.options.callback) {
-            this.options.callback();
-          }
         }.bind(this));
       }.bind(this))
     },
