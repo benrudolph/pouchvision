@@ -20,6 +20,10 @@ define([
       this.listenTo(this.model, 'change:api', this.addApi);
 
       Pouch(this.model.get('dbname'), function(err, db) {
+        if (err) {
+          console.err(err);
+          return;
+        }
         this.db = db;
         this.db.allDocs({ include_docs: true }, function(err, response) {
           this.docCollection = new PouchVision.Collections.DocsCollection();
@@ -30,6 +34,10 @@ define([
           if (this.model.get('intro')) {
             console.log('publishing..')
             $.publish('ready');
+          }
+
+          if (this.options.callback) {
+            this.options.callback();
           }
         }.bind(this));
       }.bind(this))
@@ -86,6 +94,10 @@ define([
 
     renderDocs: function() {
        this.db.allDocs({ include_docs: true }, function(err, response) {
+         if (err) {
+           console.err(err);
+           return;
+         }
          this.docCollection.reset(response.rows);
          this.docView.render();
        }.bind(this))

@@ -121,10 +121,12 @@ define([
     addOne: function(model) {
       var view = new PouchVision.Views.EnvironmentShowView({
         model: _.extend({}, model),
-        apis: _.extend({}, this.apis)
+        apis: _.extend({}, this.apis),
+        callback: function() {
+          this.$el.find('.pouches').append(view.el)
+        }.bind(this)
       });
       this.pouches.push(view);
-      this.$el.find('.pouches').append(view.el);
     }
 
   })
