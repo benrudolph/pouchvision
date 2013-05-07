@@ -37,6 +37,7 @@ define([
         var $execute = $pouch.find('.execute').first();
         var $response = $pouch.find('.response').first();
         var $name = $pouch.find('.name').first();
+        var $docs = $pouch.find('.vision-docs').first();
 
         $header.attr('data-intro', 'PouchDB lets you sync your local browser data with CouchDB or other PouchDB instances!');
         $header.attr('data-step', '1');
@@ -56,7 +57,7 @@ define([
         $api.attr('data-intro', 'You can choose which api call you want to do here');
         $api.attr('data-step', '6');
 
-        $param.attr('data-intro', 'You can click a parameter to customize the input. Also feel free to drag and drop documents on to parameters named \'doc\'');
+        $param.attr('data-intro', 'You can click a parameter to customize the input. Also feel free to drag and drop documents on to parameters named \'doc\', \'docid\', and \'rev\' (gets most recent rev)');
         $param.attr('data-step', '7');
 
 
@@ -65,6 +66,9 @@ define([
 
         $response.attr('data-intro', 'This is where the output of your api call with be shown');
         $response.attr('data-step', '9');
+
+        $docs.attr('data-intro', 'This is where your documents will show up. Each document\'s id is hashed to a color so you can easily tell which documents are the same. You can also click the document to get more information about it');
+        $docs.attr('data-step', '10');
 
         introJs().start()
       });
