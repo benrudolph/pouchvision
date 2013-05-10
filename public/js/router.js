@@ -78,11 +78,14 @@ define([
     index: function() {
       Pouch.allDbs(function(err, response) {
         if (err) {
-          console.err(err);
+          console.error(err);
         }
 
         var dbs = [];
-        var defaultDbs = [ 'jamesdean', 'einstein' ];
+        var defaultDbs = [
+          'jamesdean',
+          'einstein',
+        ];
 
         response = _.union(response, defaultDbs);
 

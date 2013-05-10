@@ -21,7 +21,7 @@ define([
 
       Pouch(this.model.get('dbname'), function(err, db) {
         if (err) {
-          console.err(err);
+          console.error(err);
           return;
         }
         this.db = db;
@@ -95,7 +95,7 @@ define([
     renderDocs: function() {
        this.db.allDocs({ include_docs: true }, function(err, response) {
          if (err) {
-           console.err(err);
+           console.error(err);
            return;
          }
          this.docCollection.reset(response.rows);
