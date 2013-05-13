@@ -43,7 +43,7 @@ define([
         var $name = $pouch.find('.name').first();
         var $docs = $pouch.find('.vision-docs').first();
 
-        $header.attr('data-intro', 'PouchDB lets you sync your local browser data with CouchDB or other PouchDB instances!');
+        $header.attr('data-intro', 'Pouchvision lets you see and interactive with PouchDB. PouchDB is a javascript database that lets you replicate to CouchDB or PouchDB instances');
         $header.attr('data-step', '1');
 
         $staticPouch.attr('data-intro', 'This is where you can make static Pouch calls.');
