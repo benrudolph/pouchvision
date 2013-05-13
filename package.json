@@ -6,7 +6,7 @@
     "www.pouchvision.com"
   ],
   "description": "Envisioning pouch",
-  "version": "0.0.1-12",
+  "version": "0.0.1-13",
   "private": true,
   "dependencies": {
     "express": "3.x",
