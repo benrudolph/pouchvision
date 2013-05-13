@@ -14,7 +14,10 @@ define(['underscore'], function(_) {
       '<div class="parameters"></div>',
       '<button class="static-execute btn pull-right">Execute!</button>',
     '</div>',
-    '<div class="response static-response row"></div>',
+    '<div class="response static-response row">',
+      '<div class="elapsed-time"></div>',
+      '<div class="static-response-content"></div>',
+    '</div>',
     '</div>',
     '<div class="pouch-header">',
       '<h2>Pouch Instances</h2>',
@@ -40,7 +43,10 @@ define(['underscore'], function(_) {
     '<div class="parameters pull-left"></div>',
     '<button class="execute btn pull-right">Execute!</button>',
     '</div>',
-    '<div class="response row"></div>',
+    '<div class="response row">',
+      '<div class="elapsed-time"></div>',
+      '<div class="response-content"></div>',
+    '</div>',
     '<div class="vision-docs row"></div>'
   ].join(''));
 

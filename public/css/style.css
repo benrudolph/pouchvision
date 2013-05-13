@@ -186,11 +186,17 @@ u {
 }
 
 .response {
-  height: 100px;
+  height: 125px;
   overflow: auto;
   background-color: #ffffd0;
   margin: 10px 0;
   border: 1px solid #2c3e50;
+}
+
+.response .elapsed-time, .static-response .elapsed-time {
+  float: right;
+  margin: 2px;
+  font-size: 13px;
 }
 
 .pull-left {
@@ -219,6 +225,7 @@ u {
 .gone {
   display: none;
 }
+
 
 #mixpanel img {
   margin-top: 20px;

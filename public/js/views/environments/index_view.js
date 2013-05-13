@@ -57,8 +57,10 @@ define([
       })
 
       that.inspector = new InspectorJSON({
-          element: that.$el.find('.static-response')
+          element: that.$el.find('.static-response-content')
       });
+
+      that.$el.find('.elapsed-time').text('Elapsed Time: ' + ((+(new Date) - this.start) / 1000) + ' seconds');
       that.inspector.view(JSON.stringify(that.staticResponse));
       if (err)
         return;
@@ -76,7 +78,8 @@ define([
       parsedParameters.push(this.callback.bind({
         'that': this,
         'static_api_name': staticName,
-        'parameters': parsedParameters
+        'parameters': parsedParameters,
+        'start': +(new Date())
       }));
 
       if (staticName === 'destroy') {

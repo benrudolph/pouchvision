@@ -77,7 +77,7 @@ define([
         'parameters': parameters
       })
 
-      that.renderResponse();
+      that.renderResponse(+(new Date) - this.start);
       that.renderDocs();
 
     },
@@ -95,7 +95,8 @@ define([
       parsedParameters.push(this.callback.bind({
         'that': this,
         'apiName': apiName,
-        'parsedParameters': parsedParameters
+        'parsedParameters': parsedParameters,
+        'start': +(new Date)
       }));
 
       this.db[apiName].apply(this, parsedParameters);
@@ -128,13 +129,16 @@ define([
        }.bind(this))
     },
 
-    renderResponse: function() {
+    renderResponse: function(elapsedTime) {
       if (this.inspector)
         this.inspector.destroy();
       this.inspector = new InspectorJSON({
-          element: this.$el.find('.response')
+          element: this.$el.find('.response-content')
       });
       this.inspector.view(JSON.stringify(this.model.get('response')));
+
+      if (elapsedTime)
+        this.$el.find('.elapsed-time').text('Elapsed Time: ' + (elapsedTime / 1000) + ' seconds');
     },
 
     render: function() {
