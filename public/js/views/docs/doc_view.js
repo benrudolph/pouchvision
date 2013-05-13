@@ -32,8 +32,13 @@ define([
     },
 
     onClick: function(e) {
-      this.$el.find('.vision-popup-container').toggleClass('gone');
-      this.$el.find('.vision-doc').toggleClass('selected');
+      var $popup = this.$el.find('.vision-popup-container');
+      var $doc = this.$el.find('.vision-doc');
+      $popup.toggleClass('gone');
+      var position = $doc.position();
+      position.top += $doc.height();
+      $popup.css(position);
+      $doc.toggleClass('selected');
     },
 
     render: function() {
