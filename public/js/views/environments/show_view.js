@@ -63,16 +63,22 @@ define([
     },
 
     callback: function(err, response) {
-      this.model.set('response', (response || err));
+      var that = this.that;
+      var apiName = this.apiName;
+      var parameters = this.parsedParamters;
 
-      mixpanel.track("API Response", {
-        'db_name': this.model.get('dbname'),
+      that.model.set('response', (response || err));
+
+      mixpanel.track("API Call", {
+        'db_name': that.model.get('dbname'),
         'response': response,
         'err': err,
+        'api_name': apiName,
+        'parameters': parameters
       })
 
-      this.renderResponse();
-      this.renderDocs();
+      that.renderResponse();
+      that.renderDocs();
 
     },
 
@@ -81,15 +87,16 @@ define([
       var apiName = this.model.get('api');
       var api = this.apis.findWhere({ name: apiName });
 
-      var parsedParameters = PouchVision.util.parseParameters(api.get('parameters'))
+      var parsedParameters = PouchVision.util.parseParameters(api.get('parameters'));
 
-      parsedParameters.push(this.callback.bind(this));
+      var that = this;
 
-      mixpanel.track("API Call", {
-        'db_name': this.model.get('dbname'),
-        'api_name': apiName,
-        'parameters': parsedParameters,
-      })
+      // Bind callback with info for tracking
+      parsedParameters.push(this.callback.bind({
+        'that': this,
+        'apiName': apiName,
+        'parsedParameters': parsedParameters
+      }));
 
       this.db[apiName].apply(this, parsedParameters);
     },

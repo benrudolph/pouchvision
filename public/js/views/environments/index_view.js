@@ -46,20 +46,23 @@ define([
     },
 
     callback: function(err, response) {
-      this.staticResponse = (err || response);
+      var that = this.that;
+      that.staticResponse = (err || response);
 
-      mixpanel.track("StaticAPI Response", {
+      mixpanel.track("StaticAPI Call", {
         'response': response,
         'err': err,
+        'static_api_name': this.static_api_name,
+        'parameters': this.parameters
       })
 
-      this.inspector = new InspectorJSON({
-          element: this.$el.find('.static-response')
+      that.inspector = new InspectorJSON({
+          element: that.$el.find('.static-response')
       });
-      this.inspector.view(JSON.stringify(this.staticResponse));
+      that.inspector.view(JSON.stringify(that.staticResponse));
       if (err)
         return;
-      this.pouches.forEach(function(pouch) {
+      that.pouches.forEach(function(pouch) {
         pouch.renderDocs();
       });
     },
@@ -70,7 +73,12 @@ define([
 
       var parsedParameters = PouchVision.util.parseParameters(static.get('parameters'));
 
-      parsedParameters.push(this.callback.bind(this));
+      parsedParameters.push(this.callback.bind({
+        'that': this,
+        'static_api_name': staticName,
+        'parameters': parsedParameters
+      }));
+
       if (staticName === 'destroy') {
         var deletedPouch = this.collection.findWhere({ dbname: parsedParameters[0] });
         this.collection.remove(deletedPouch);
@@ -82,11 +90,6 @@ define([
           return true;
         });
       }
-
-      mixpanel.track("StaticAPI Call", {
-        'static_api_name': staticName,
-        'parameters': parsedParameters,
-      })
 
       Pouch[staticName].apply(this, parsedParameters);
     },
