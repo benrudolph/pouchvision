@@ -30,6 +30,11 @@ u {
   padding-left: 20px;
 }
 
+#pouch-vision .loading {
+  margin: auto;
+  display: block;
+}
+
 .add-pouch-container {
   margin-left: 15px;
   display: inline-block;
