@@ -36,6 +36,10 @@ define([
     changeStaticApi: function(e) {
       var staticApiName = $(e.currentTarget).val();
 
+      mixpanel.track("StaticAPI Change", {
+        'from': this.model.get('staticApi'),
+        'to': staticApiName,
+      })
       this.model.set('staticApi', staticApiName);
       this.renderStaticApi();
 
@@ -43,6 +47,12 @@ define([
 
     callback: function(err, response) {
       this.staticResponse = (err || response);
+
+      mixpanel.track("StaticAPI Response", {
+        'response': response,
+        'err': err,
+      })
+
       this.inspector = new InspectorJSON({
           element: this.$el.find('.static-response')
       });
@@ -72,6 +82,12 @@ define([
           return true;
         });
       }
+
+      mixpanel.track("StaticAPI Call", {
+        'static_api_name': staticName,
+        'parameters': parsedParameters,
+      })
+
       Pouch[staticName].apply(this, parsedParameters);
     },
 
@@ -80,6 +96,10 @@ define([
 
       if (!name)
         return;
+
+      mixpanel.track("Add Pouch", {
+        'db_name': name
+      })
 
       this.collection.add({
         dbname: name,

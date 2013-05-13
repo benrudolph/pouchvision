@@ -9,6 +9,13 @@
     <link rel="icon"
       type="image/png"
       href="img/eye.png">
+      <!-- start Mixpanel -->
+      <script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f);b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==
+typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");for(g=0;g<i.length;g++)f(c,i[g]);
+b._i.push([a,e,d])};b.__SV=1.2}})(document,window.mixpanel||[]);
+      mixpanel.init("c155822d673c8b94ea50491c84fd1ff2");
+      </script>
+    <!-- end Mixpanel -->
   </head>
   <body>
     <div class="topbar row">
@@ -19,16 +26,18 @@
         <u>About</u>
         <p>Pouchvision lets you use PouchDB's apis to understand what you can you can do with it. PouchDB is
         a javascript database that lets you sync your data with CouchDB and other PouchDB instances. Want
-        more? Try the <a href="/#intro">intro</a></p>
+        more? Try the <a id="intro_link" href="/#intro">intro</a></p>
         <span class="tip"><b>Protip:</b>&nbsp;Drag and drop on docs onto parameters that require doc, docid, or rev</span>
         <span class="tip"><b>Protip:</b>&nbsp;Click a document to see its contents</span>
         <br />
-        <a href="http://pouchdb.com/">PouchDB</a>
+        <a id="pouchdb_link" href="http://pouchdb.com/">PouchDB</a>
         <br />
-        <a href="https://github.com/benrudolph/pouchvision">Pouchvision source</a>
+        <a id="pouchvision_link" href="https://github.com/benrudolph/pouchvision">Pouchvision source</a>
+      <a id="mixpanel" href="http://mixpanel.com/f/partner"><img
+        src="http://mixpanel.com/site_media/images/partner/badge_light.png" alt="Mobile Analytics" /></a>
       </div>
       <div id="pouch-vision" class="container"></div>
     </div>
     <script data-main="js/main" src="js/libs/require.js"></script>
-  </body>
+    </body>
 </head>

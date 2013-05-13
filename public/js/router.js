@@ -13,7 +13,11 @@ define([
       this.apis.reset(PouchVision.Apis)
 
       this.statics = new PouchVision.Collections.StaticsCollection();
-      this.statics.reset(PouchVision.Statics)
+      this.statics.reset(PouchVision.Statics);
+
+      mixpanel.track_links('#intro_link', 'Intro Link');
+      mixpanel.track_links('#pouchvision_link', 'PouchVision Link');
+      mixpanel.track_links('#pouchdb_link', 'PouchDB Link');
 
     },
 
@@ -78,7 +82,7 @@ define([
     index: function() {
       Pouch.allDbs(function(err, response) {
         if (err) {
-          console.error(err);
+          console.err(err);
         }
 
         var dbs = [];

@@ -50,6 +50,12 @@ define([
 
     changeApi: function(e) {
       var apiName = $(e.currentTarget).val()
+
+      mixpanel.track("API Change", {
+        'db_name': this.model.get('dbname'),
+        'from': this.model.get('api'),
+        'to': apiName,
+      })
       this.model.set('api', apiName);
 
       this.render();
@@ -58,6 +64,13 @@ define([
 
     callback: function(err, response) {
       this.model.set('response', (response || err));
+
+      mixpanel.track("API Response", {
+        'db_name': this.model.get('dbname'),
+        'response': response,
+        'err': err,
+      })
+
       this.renderResponse();
       this.renderDocs();
 
@@ -70,8 +83,13 @@ define([
 
       var parsedParameters = PouchVision.util.parseParameters(api.get('parameters'))
 
-      console.log(parsedParameters);
-      parsedParameters.push(this.callback.bind(this))
+      parsedParameters.push(this.callback.bind(this));
+
+      mixpanel.track("API Call", {
+        'db_name': this.model.get('dbname'),
+        'api_name': apiName,
+        'parameters': parsedParameters,
+      })
 
       this.db[apiName].apply(this, parsedParameters);
     },

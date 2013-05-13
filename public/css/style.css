@@ -220,3 +220,7 @@ u {
   display: none;
 }
 
+#mixpanel img {
+  margin-top: 20px;
+}
+
