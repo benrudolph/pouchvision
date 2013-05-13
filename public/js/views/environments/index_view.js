@@ -48,19 +48,21 @@ define([
     callback: function(err, response) {
       var that = this.that;
       that.staticResponse = (err || response);
+      var elapsedTime = (+(new Date) - this.start);
 
       mixpanel.track("StaticAPI Call", {
         'response': response,
         'err': err,
         'static_api_name': this.static_api_name,
-        'parameters': this.parameters
+        'parameters': this.parameters,
+        'elapsed_time': elapsedTime
       })
 
       that.inspector = new InspectorJSON({
           element: that.$el.find('.static-response-content')
       });
 
-      that.$el.find('.elapsed-time').text('Elapsed Time: ' + ((+(new Date) - this.start) / 1000) + ' seconds');
+      that.$el.find('.static-response .elapsed-time').text('Elapsed Time: ' + (elapsedTime / 1000) + ' seconds');
       that.inspector.view(JSON.stringify(that.staticResponse));
       if (err)
         return;

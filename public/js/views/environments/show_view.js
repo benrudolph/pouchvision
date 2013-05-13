@@ -66,6 +66,7 @@ define([
       var that = this.that;
       var apiName = this.apiName;
       var parameters = this.parsedParamters;
+      var elapsedTime = +(new Date) - this.start;
 
       that.model.set('response', (response || err));
 
@@ -74,10 +75,11 @@ define([
         'response': response,
         'err': err,
         'api_name': apiName,
-        'parameters': parameters
+        'parameters': parameters,
+        'elapsed_time': elapsedTime
       })
 
-      that.renderResponse(+(new Date) - this.start);
+      that.renderResponse(elapsedTime);
       that.renderDocs();
 
     },
