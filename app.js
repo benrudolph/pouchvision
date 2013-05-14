@@ -32,5 +32,5 @@ http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
 
-cors_proxy.options = { target: 'https://benrudolph.cloudant.com' }
+cors_proxy.options = { target: 'http://pouchvision.iriscouch.com/' }
 http_proxy.createServer(cors_proxy).listen(2020);
