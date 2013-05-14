@@ -208,8 +208,10 @@ u {
   width: 400px;
   border: 1px #2c3e50 solid;
   min-height: 150px;
-  position: absolute;
+  position: fixed;
   top: 100px;
+  left: 500px;
+  background-color: white;
   padding: 15px;
   -webkit-box-shadow: 5px 5px 7px rgba(50, 50, 50, 0.75);
   -moz-box-shadow:    5px 5px 7px rgba(50, 50, 50, 0.75);

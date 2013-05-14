@@ -110,7 +110,7 @@ define([
           })
 
           if (isHttp) {
-            name = 'http://localhost:2020/' + name;
+            name = 'http://' + window.location.hostname + ':2020/' + name;
           }
 
           this.collection.add({

@@ -39,7 +39,6 @@ define([
 
     render: function() {
       this.$el.html(this.template());
-      this.$el.css('left', ($(document).width() / 2) - (this.$el.width() / 2));
       return this;
     }
   })
