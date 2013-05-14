@@ -121,18 +121,20 @@ define(['underscore'], function(_) {
   ].join(''));
 
   window.JST['application/prompt'] = _.template([
-    '<div class="addpouch-popup">',
-      '<div class="addpouch-form">',
-        '<div class="addpouch-name-container">',
-          '<label for="addpouch-name">DB Name:&nbsp;</label>',
-          '<input type="text" name="addpouch-name" class="addpouch-name" />',
-        '</div>',
-        '<div class="addpouch-ishttp-container">',
-          '<label for="addpouch-name">Make it remote?</label>',
-          '<input type="checkbox" name="addpouch-ishttp" class="addpouch-ishttp" />'
-        '</div>',
+    '<div class="addpouch-form">',
+      '<div class="addpouch-name-container">',
+        '<label for="addpouch-name">DB Name:&nbsp;</label>',
+        '<input type="text" name="addpouch-name" class="addpouch-name" />',
       '</div>',
-    '</div>'
+      '<div class="addpouch-ishttp-container">',
+        '<label for="addpouch-name">Make it remote?</label>',
+        '<input type="checkbox" name="addpouch-ishttp" class="addpouch-ishttp" />',
+      '</div>',
+      '<div class="addpouch-buttons">',
+        '<button class="ok">Ok</button>',
+        '<button class="cancel">Cancel</button>',
+      '</div>',
+    '</div>',
   ].join(''));
 
 });

@@ -19,6 +19,7 @@ define([
     '/js/views/docs/index_view.js',
     '/js/views/docs/doc_view.js',
     '/js/views/statics/static_view.js',
+    '/js/views/application/prompt_view.js',
     '/js/router.js', /* Router */
     '/js/src/util.js'
     ], function($, _, d3, Pouch, Backbone, PouchVision, templates, store, CodeMirror) {

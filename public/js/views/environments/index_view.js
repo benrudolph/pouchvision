@@ -100,20 +100,28 @@ define([
     },
 
     onAddPouch: function(e) {
-      var name = prompt('Please enter the pouch name');
+      var addPouchPrompt = new PouchVision.Views.ApplicationPromptView({
+        callback: function(name, isHttp) {
+          if (!name)
+            return;
+          mixpanel.track("Add Pouch", {
+            'db_name': name,
+            'is_http': isHttp
+          })
 
-      if (!name)
-        return;
+          if (isHttp) {
+            name = 'http://localhost:2020/' + name;
+          }
 
-      mixpanel.track("Add Pouch", {
-        'db_name': name
-      })
-
-      this.collection.add({
-        dbname: name,
-        api: 'post',
-        response: {}
+          this.collection.add({
+            dbname: name,
+            api: 'post',
+            response: {}
+          });
+        }.bind(this)
       });
+
+      $('body').append(addPouchPrompt.el);
     },
 
     addStaticApi: function() {
