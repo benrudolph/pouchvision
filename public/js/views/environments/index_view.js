@@ -110,7 +110,7 @@ define([
           })
 
           if (isHttp) {
-            name = 'http://' + window.location.hostname + ':2020/' + name;
+            name = 'http://brudolph.pouchvision-proxy.jit.su/' + name;
           }
 
           this.collection.add({
