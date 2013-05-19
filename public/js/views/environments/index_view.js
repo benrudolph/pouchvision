@@ -116,6 +116,7 @@ define([
           this.collection.add({
             dbname: name,
             api: 'post',
+            isHttp: isHttp,
             response: {}
           });
         }.bind(this)

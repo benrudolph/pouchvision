@@ -97,6 +97,7 @@ define([
           var db = {
             dbname: dbname,
             api: 'post',
+            isHttp: false,
             response: {}
           }
           if (i === 0) {

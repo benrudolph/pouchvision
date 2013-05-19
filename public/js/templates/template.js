@@ -30,6 +30,7 @@ define(['underscore'], function(_) {
     ].join(''));
 
   window.JST['environment/show'] = _.template([
+    '<% if (model.isHttp) { %><div class="is-http">remote</div><% } %>',
     '<div class="row name">Name: <%= model.dbname %></div>',
     '<div class="db row">',
     '<label class=" pull-left">db.</label>',

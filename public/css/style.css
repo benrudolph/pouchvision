@@ -100,6 +100,7 @@ u {
   min-height: 100px;
   width: 400px;
   padding: 10px;
+  padding-top: 20px;
   margin: 5px;
   border: 1px solid #2c3e50;
 }
@@ -250,3 +251,12 @@ u {
   margin-top: 20px;
 }
 
+.is-http {
+  position: absolute;
+  background-color: #2c3e50;
+  color: white;
+  padding: 3px;
+  margin: -11px;
+  margin-top: -21px;
+  font-size: 12px;
+}
