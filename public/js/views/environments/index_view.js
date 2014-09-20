@@ -110,7 +110,7 @@ define([
           })
 
           if (isHttp) {
-            name = 'http://localhost:2020/pouchvision.iriscouch.com/' + name;
+            name = 'http://pouchvision-proxy.benrudolph.com/pouchvision.iriscouch.com/' + name;
           }
 
           this.collection.add({
