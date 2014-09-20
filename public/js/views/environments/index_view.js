@@ -110,7 +110,7 @@ define([
           })
 
           if (isHttp) {
-            name = 'http://brudolph.pouchvision-proxy.jit.su/' + name;
+            name = 'http://localhost:2020/pouchvision.iriscouch.com/' + name;
           }
 
           this.collection.add({
