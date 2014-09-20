@@ -2,11 +2,11 @@
   "name": "pouchvision.com",
   "subdomain": "pouchvision",
   "domains": [
-    "pouchvision.com",
-    "www.pouchvision.com"
+    "benrudolph.com",
+    "pouchvision.pouchvision.com"
   ],
   "description": "Envisioning pouch",
-  "version": "0.0.1-19",
+  "version": "0.0.1-20",
   "private": true,
   "dependencies": {
     "express": "3.x",
